@@ -37,6 +37,7 @@ namespace Intex2A
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddScoped<IintexRepository, EFintexRepository>();
             services.AddControllersWithViews();
@@ -68,10 +69,16 @@ namespace Intex2A
             options.ClientId = googleAuthNSection["ClientId"];
             options.ClientSecret = googleAuthNSection["ClientSecret"];
         });
+            services.AddHsts(options =>
+            {
+                options.Preload = true;
+                options.IncludeSubDomains = true;
+                options.MaxAge = TimeSpan.FromDays(60);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -84,6 +91,8 @@ namespace Intex2A
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseHsts();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -95,6 +104,7 @@ namespace Intex2A
                 context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self' https://stackpath.bootstrapcdn.com 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://stackpath.bootstrapcdn.com https://fonts.gstatic.com; img-src 'self' https://via.placeholder.com; frame-src 'self'; connect-src  'self'wss://localhost:44391;");
                 await next();
             });
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -102,6 +112,17 @@ namespace Intex2A
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            //using (var scope = app.ApplicationServices.CreateScope())
+            //{
+            //    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            //    var roles = new[] { "Admin", "Manager", "Memeber" };
+            //    foreach (var role in roles)
+            //    {
+            //        if (!await roleManager.RoleExistsAsync(role))
+            //            await roleManager.CreateAsync(new IdentityRole(role));
+            //    }
+            //}
         }
     }
 }
