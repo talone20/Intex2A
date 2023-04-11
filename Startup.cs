@@ -1,5 +1,6 @@
 using Intex2A.Data;
 using Intex2A.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -60,25 +61,36 @@ namespace Intex2A
                 options.Password.RequiredLength = 13;
                 options.Password.RequiredUniqueChars = 1;
             });
-            services.AddAuthentication()
-        .AddGoogle(options =>
-        {
-            IConfigurationSection googleAuthNSection =
-                Configuration.GetSection("Authentication:Google");
+        //    services.AddAuthentication(
+        //        options =>
+        //        {
+        //            options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        //            options.DefaultChallengeScheme = "OAuthProvider";
+        //        })
+        //        .AddCookie()
+        //.AddGoogle(options =>
+        //{
+        //    IConfigurationSection googleAuthNSection =
+        //        Configuration.GetSection("Authentication:Google");
 
-            options.ClientId = googleAuthNSection["ClientId"];
-            options.ClientSecret = googleAuthNSection["ClientSecret"];
-        });
-            services.AddHsts(options =>
-            {
-                options.Preload = true;
-                options.IncludeSubDomains = true;
-                options.MaxAge = TimeSpan.FromDays(60);
-            });
+        //    options.ClientId = googleAuthNSection["ClientId"];
+        //    options.ClientSecret = googleAuthNSection["ClientSecret"];
+        //})
+        //.AddOAuth("OAuthProvider", options =>
+        //{
+        //    options.ClientId = "254761430313-purnb7pnn4rals57530jsrbsbtggumct.apps.googleusercontent.com";
+        //    // other options here
+        //});
+        //    services.AddHsts(options =>
+        //    {
+        //        options.Preload = true;
+        //        options.IncludeSubDomains = true;
+        //        options.MaxAge = TimeSpan.FromDays(60);
+        //    });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public async void Configure (IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -92,7 +104,7 @@ namespace Intex2A
                 app.UseHsts();
             }
 
-            app.UseHsts();
+            //app.UseHsts();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -119,16 +131,16 @@ namespace Intex2A
                 endpoints.MapRazorPages();
             });
 
-            //using (var scope = app.ApplicationServices.CreateScope())
-            //{
-            //    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            //    var roles = new[] { "Admin", "Manager", "Memeber" };
-            //    foreach (var role in roles)
-            //    {
-            //        if (!await roleManager.RoleExistsAsync(role))
-            //            await roleManager.CreateAsync(new IdentityRole(role));
-            //    }
-            //}
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                var roles = new[] { "Admin", "Manager", "Memeber" };
+                foreach (var role in roles)
+                {
+                    if (!await roleManager.RoleExistsAsync(role))
+                        await roleManager.CreateAsync(new IdentityRole(role));
+                }
+            }
         }
     }
 }
