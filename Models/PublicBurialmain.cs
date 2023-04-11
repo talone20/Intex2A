@@ -28,7 +28,7 @@ namespace Intex2A.Models
         public byte[] Goods { get; set; }
         public string Text { get; set; }
         public byte[] Wrapping { get; set; }
-        public byte[] Haircolor { get; set; }
+        public char Haircolor { get; set; }
         public byte[] Westtohead { get; set; }
         public byte[] Samplescollected { get; set; }
         public byte[] Area { get; set; }
