@@ -1,0 +1,76 @@
+﻿@using Microsoft.AspNetCore.Http.Features
+
+@{
+    var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
+    var showBanner = !consentFeature?.CanTrack ?? false;
+    var cookieString = consentFeature?.CreateConsentCookie();
+}
+<style>
+    #cookieConsent {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f3e6c2;
+        border: none;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+        #cookieConsent p {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        #cookieConsent a {
+            color: #b86100;
+            text-decoration: underline;
+            margin-right: 20px;
+        }
+
+        #cookieConsent .accept-policy {
+            background-color: #b86100;
+            border: none;
+            color: #fff;
+            font-weight: 600;
+            font-size: 18px;
+            padding: 8px 20px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin:25%;
+            margin-right:31px;
+            cursor: pointer;
+        }
+
+        #cookieConsent .accept-policy:focus {
+            outline: none;
+        }
+
+        #cookieConsent .accept-policy:hover {
+            background-color: #8f4b00;
+        }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+@if (showBanner)
+{
+    <div id="cookieConsent" class="alert alert-info alert-dismissible fade show" role="alert">
+        We use cookies, please accept! <a asp-page="/Privacy">Learn More</a>.
+        <button type="button" class="accept-policy close" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
+            <span aria-hidden="true">Accept</span>
+        </button>
+    </div>
+    <script>
+        (function () {
+            var button = document.querySelector("#cookieConsent button[data-cookie-string]");
+            button.addEventListener("click", function (event) {
+                document.cookie = button.dataset.cookieString;
+            }, false);
+        })();
+    </script>
+}

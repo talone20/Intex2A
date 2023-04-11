@@ -1,9 +1,263 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-@model BurialsViewModel
+﻿<style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: 'Roboto',sans-serif;
+    }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    .hero {
+        width: 100%;
+        height: 100vh;
+        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url('lib/image/background.png');
+        background-size: cover;
+        background-position: center;
+        padding-left: 8%;
+        padding-right: 8%;
+        box-sizing: border-box;
+    }
+
+    .overlay {
+        background-color: rgba(0, 0, 0, 1);
+        height: 100%;
+        width: 100%;
+        position: absolute;
+    }
+
+    .bar {
+        height: 12%;
+        display: flex;
+        align-items: center;
+    }
+
+    .logo {
+        width: 50px;
+        cursor: pointer;
+    }
+
+    .menu-icon {
+        width: 30px;
+        cursor: pointer;
+        margin-left: 40px;
+    }
+
+    nav {
+        flex: 1;
+        text-align: right;
+    }
+
+    nav ul li {
+        list-style: none;
+        display: inline-block;
+        margin-left: 60px;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 13px;
+    }
+
+    .row {
+        display: flex;
+        height: 88%;
+        align-items: center;
+    }
+
+    h1 {
+        color: #fff;
+        font-size: 100px;
+    }
+
+    p {
+        color: #fff;
+        font-size: 11px;
+        line-height: 15px;
+    }
+
+    button {
+        width: 180px;
+        color: #000;
+        font-size: 12px;
+        padding: 12px 0;
+        background: #fff;
+        border: 0;
+        border-radius: 20px;
+        outline: none;
+        margin-top: 30px;
+    }
+
+    .card {
+        width: 200px;
+        height: 230px;
+        display: inline-block;
+        border-radius: 10px;
+        padding: 15px 25px;
+        box-sizing: border-box;
+        cursor: pointer;
+        margin: 10px 15px;
+        background-position: center;
+        background-size: cover;
+        transition: transform 0.5s;
+    }
+
+    .card1 {
+        background-image: url('lib/image/pic-1.png');
+    }
+
+    .card2 {
+        background-image: url('lib/image/pic-2.png');
+    }
+
+    .card3 {
+        background-image: url('lib/image/pic-3.png');
+    }
+
+    .card4 {
+        background-image: url('lib/image/pic-4.png');
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+    }
+
+    h5 {
+        color: #fff;
+        text-shadow: 0 0 5px #999;
+    }
+
+    .card p {
+        text-shadow: 0 0 15px #000;
+    }
+
+    .section-container {
+        font-family: 'Roboto', sans-serif;
+        padding: 100px 0;
+    }
+
+    .section-title {
+        font-weight: 700;
+        color: #b86100;
+        margin-bottom: 40px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: relative;
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 50px;
+        height: 4px;
+        background-color: #b86100;
+    }
+
+    .section-text {
+        font-size: 18px;
+        line-height: 1.8;
+        color: #6e5d2d;
+        padding: 0 15px;
+        margin-bottom: 40px;
+    }
+
+    .section-btn {
+        background-color: #b86100;
+        color: #fff;
+        font-weight: 600;
+        padding: 14px 35px;
+        border-radius: 5px;
+        transition: all 0.3s;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+        .section-btn:hover {
+            background-color: #8f4b00;
+            color: #fff;
+            text-decoration: none;
+        }
+
+    .rounded-image {
+        border-radius: 10px;
+        margin-left: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+    }
+
+    .rounded-image:hover {
+        transform: scale(1.05);
+    }
+</style>
+
+<div class="hero">
+    <div class="bar">
+        <img src="~/lib/image/logo.png" class="logo">
+        <nav>
+            <ul>
+                <li>
+                    <a href="">Home</a>
+                </li>
+                <li>
+                    <a href="">Burial Information</a>
+                </li>
+                <li>
+                    <a href="">Supervised</a>
+                </li>
+                <li>
+                    <a href="">Unsupervised</a>
+                </li>
+                <li>
+                   <partial name="_LoginPartial" />
+                </li>
+                
+            </ul>
+        </nav>
+
+    </div>
+    <div class="row">
+        <div class="col">
+            <h1>Fag el-Gamous</h1>
+            <p>Discover the secrets of ancient Egypt through the fascinating Fag el-Gamous mummies, unveiling their hidden stories and illuminating the past.</p>
+            <button>Burial Information</button>
+        </div>
+        <div class="col">
+            <div class="card card1">
+                <h5> Wester</h5>
+                <p>Lorem Ipsum asdsdfkdjfjlkdsfgj sdjgfklsdhfgj ksldhfg Theui sdf oier0gt0hjogdi hsdogff hsodfiuhjs of</p>
+            </div>
+            <div class="card card2">
+                <h5> Wester</h5>
+                <p>Lorem Ipsum asdsdfkdjfjlkdsfgj sdjgfklsdhfgj ksldhfg Theui sdf oier0gt0hjogdi hsdogff hsodfiuhjs of</p>
+            </div>
+            <div class="card card3">
+                <h5> Wester</h5>
+                <p>Lorem Ipsum asdsdfkdjfjlkdsfgj sdjgfklsdhfgj ksldhfg Theui sdf oier0gt0hjogdi hsdogff hsodfiuhjs of</p>
+            </div>
+            <div class="card card4">
+                <h5> Wester</h5>
+                <p>Lorem Ipsum asdsdfkdjfjlkdsfgj sdjgfklsdhfgj ksldhfg Theui sdf oier0gt0hjogdi hsdogff hsodfiuhjs of</p>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+<div class="container my-5 section-container">
+    <div class="row">
+        <!-- Left column -->
+        <div class="col-md-6">
+            <h2 class="section-title">Journey into the World of Ancient Egyptian Mummies</h2>
+            <p class="section-text">
+                Fag el-Gamous, a significant Egyptian cemetery, has been the subject of extensive archaeological investigation for over 25 years. This research, led by BYU experts, has uncovered more than 1,000 mummies,
+                shedding light on burial practices and providing valuable insights into ancient Egyptian life. With data collected from excavations and offsite analyses,
+                the project has contributed to our understanding of mummy characteristics, burial items, and techniques used in their preservation.
+            </p>
+            <a href="#" class="section-btn">Learn More</a>
+        </div>
+
+        <!-- Right column -->
+        <div class="col-md-6">
+            <img src="~/lib/image/fag-el-gamous.jpg" alt="Sample image" class="img-fluid rounded-image">
+        </div>
+    </div>
