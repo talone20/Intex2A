@@ -44,6 +44,27 @@ namespace Intex2A.Controllers
             return View(x);
         }
 
+        public IActionResult Summary(int pageNum = 1)
+        {
+            int pageSize = 10;
+
+            var x = new BurialsViewModel
+            {
+                Burials = repo.Burials
+                .OrderBy(x => x.Id)
+                .Skip((pageNum - 1) * pageSize)
+                .Take(pageSize),
+
+                PageInfo = new PageInfo
+                {
+                    TotalNumBurials = repo.Burials.Count(),
+                    BurialsPerPage = pageSize,
+                    CurrentPage = pageNum
+                }
+            };
+
+            return View(x);
+        }
         public IActionResult Privacy()
         {
             return View();
