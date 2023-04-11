@@ -1,8 +1,26 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@model BurialsViewModel
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+
+<div>
+    @foreach (PublicBurialmain Bm in Model.Burials)
+    {
+        <h3>Burial ID: @Bm.Id</h3>
+
+        <ul>
+            <li>Preservation: @Bm.Preservation</li>
+            <li>Text: @Bm.Text</li>
+        </ul>
+        <br />
+    }
+
+</div>
+
+<a asp-action="Index" asp-route-pageNum="pageNum"></a>

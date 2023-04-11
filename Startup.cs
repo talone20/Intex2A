@@ -1,4 +1,5 @@
 using Intex2A.Data;
+using Intex2A.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -22,16 +23,21 @@ namespace Intex2A
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<dataContext>(options =>
+            {
+                options.UseSqlite(Configuration["ConnectionStrings:IntexDBConnection"]);
+            });
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddScoped<IintexRepository, EFintexRepository>();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

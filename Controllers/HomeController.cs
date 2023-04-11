@@ -1,4 +1,5 @@
 ﻿using Intex2A.Models;
+using Intex2A.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -13,14 +14,34 @@ namespace Intex2A.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private IintexRepository repo;
+
+        public HomeController(ILogger<HomeController> logger, IintexRepository temp)
         {
+            repo = temp;
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int pageNum = 1)
         {
-            return View();
+            int pageSize = 10;
+
+            var x = new BurialsViewModel
+            {
+                Burials = repo.Burials
+                .OrderBy(x => x.Id)
+                .Skip((pageNum - 1) * pageSize)
+                .Take(pageSize),
+
+                PageInfo = new PageInfo
+                {
+                    TotalNumBurials = repo.Burials.Count(),
+                    BurialsPerPage = pageSize,
+                    CurrentPage = pageNum
+                }
+            };
+
+            return View(x);
         }
 
         public IActionResult Privacy()
