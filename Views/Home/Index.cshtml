@@ -199,7 +199,7 @@
                     <a href="">Home</a>
                 </li>
                 <li>
-                    <a href="">Burial Information</a>
+                    <a asp-controller="Home" asp-action="Summary">Burial Information</a>
                 </li>
                 <li>
                     <a href="">Supervised</a>
@@ -219,24 +219,28 @@
         <div class="col">
             <h1>Fag el-Gamous</h1>
             <p>Discover the secrets of ancient Egypt through the fascinating Fag el-Gamous mummies, unveiling their hidden stories and illuminating the past.</p>
-            <button>Burial Information</button>
+            <a class="btn btn-outline-light" asp-controller="Home" asp-action="Summary">Information about dead egyptians.</a>
         </div>
         <div class="col">
             <div class="card card1">
-                <h5> Wester</h5>
-                <p>Lorem Ipsum asdsdfkdjfjlkdsfgj sdjgfklsdhfgj ksldhfg Theui sdf oier0gt0hjogdi hsdogff hsodfiuhjs of</p>
+                <h5>Supervised</h5>
+                <p>Click here to view the results of our supervised machine learning models</p>
             </div>
             <div class="card card2">
-                <h5> Wester</h5>
-                <p>Lorem Ipsum asdsdfkdjfjlkdsfgj sdjgfklsdhfgj ksldhfg Theui sdf oier0gt0hjogdi hsdogff hsodfiuhjs of</p>
+                <h5>Unsupervised</h5>
+                <p>Here you can view the results of our unsepervised machine learning models</p>
             </div>
             <div class="card card3">
-                <h5> Wester</h5>
-                <p>Lorem Ipsum asdsdfkdjfjlkdsfgj sdjgfklsdhfgj ksldhfg Theui sdf oier0gt0hjogdi hsdogff hsodfiuhjs of</p>
+                <a asp-controller="Home" asp-action="Summary">
+                    <h5>Mummy Data</h5>
+                    <p>Click here to view a summary of all mummies found!</p>
+                </a>
             </div>
             <div class="card card4">
-                <h5> Wester</h5>
-                <p>Lorem Ipsum asdsdfkdjfjlkdsfgj sdjgfklsdhfgj ksldhfg Theui sdf oier0gt0hjogdi hsdogff hsodfiuhjs of</p>
+                <a class="privacy" href="https://www.privacypolicies.com/live/120101d1-7213-4403-933f-73eb70db8ccc">
+                    <h5>Privacy</h5>
+                    <p>And finally, we present the most interesting privacy laws on this side of the atlantic ocean!!</p>
+                </a>
             </div>
         </div>
     </div>

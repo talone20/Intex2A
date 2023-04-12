@@ -120,10 +120,36 @@ namespace Intex2A
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "wrappingpage",
+                    pattern: "{wrapping}/Page{pageNum}",
+                    defaults: new { Controller = "Home", action = "Summary" });
+
+                endpoints.MapControllerRoute(
+                    name: "sexpage",
+                    pattern: "{sex}/Page{pageNum}",
+                    defaults: new { Controller = "Home", action = "Summary" });
+
+                endpoints.MapControllerRoute(
                     name:"Paging",
                     pattern:"Page{pageNum}",
-                    defaults: new { Controller="Home", action="Index"}
-                    );
+                    defaults: new { Controller="Home", action="Summary", pageNum=1});
+
+                endpoints.MapControllerRoute(
+                    name: "wrapping",
+                    pattern: "{wrapping}",
+                    defaults: new { Controller = "Home", action = "Summary", pageNum=1 });
+
+                endpoints.MapControllerRoute(
+                    name: "sex",
+                    pattern: "{sex}",
+                    defaults: new { Controller = "Home", action = "Summary", pageNum = 1 });
+
+
+
+
+
+
+
 
                 endpoints.MapControllerRoute(
                     name: "default",
