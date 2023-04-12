@@ -9,7 +9,6 @@ namespace Intex2A.Models.PredictionModels
         public float SouthToHead { get; set; }
         public float SquareEastWest { get; set; }
         public float Goods { get; set; }
-        public float Wrapping { get; set; }
         public float WestToHead { get; set; }
         public float WestToFeet { get; set; }
         public float SouthToFeet { get; set; }
@@ -28,12 +27,12 @@ namespace Intex2A.Models.PredictionModels
         {
             float[] data = new float[]
             {
-            Depth, FaceBundles, SouthToHead, SquareEastWest, Goods,
-            Wrapping, WestToHead, WestToFeet, SouthToFeet, NorthSouth_N,
+            Depth, FaceBundles, SouthToHead, SquareEastWest, Goods, 
+            WestToHead, WestToFeet, SouthToFeet, NorthSouth_N,
             EastWest_E, EastWest_W, Area_NE, Area_SE, Area_SW,
             AgeAtDeath_A, AgeAtDeath_C, AgeAtDeath_I, AgeAtDeath_N
             };
-            int[] dimensions = new int[] { 1, 19 };
+            int[] dimensions = new int[] { 1, 18 };
             return new DenseTensor<float>(data, dimensions);
         }
     }

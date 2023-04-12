@@ -89,7 +89,7 @@ namespace Intex2A
             //        options.MaxAge = TimeSpan.FromDays(60);
             //    });
             services.AddSingleton<InferenceSession>(
-                new InferenceSession("Model/SupervisedModel.onnx")
+                new InferenceSession("Model/my_model.onnx1")
               );
         }
 
