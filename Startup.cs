@@ -61,32 +61,32 @@ namespace Intex2A
                 options.Password.RequiredLength = 13;
                 options.Password.RequiredUniqueChars = 1;
             });
-        //    services.AddAuthentication(
-        //        options =>
-        //        {
-        //            options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-        //            options.DefaultChallengeScheme = "OAuthProvider";
-        //        })
-        //        .AddCookie()
-        //.AddGoogle(options =>
-        //{
-        //    IConfigurationSection googleAuthNSection =
-        //        Configuration.GetSection("Authentication:Google");
+            //    services.AddAuthentication(
+            //        options =>
+            //        {
+            //            options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            //            options.DefaultChallengeScheme = "OAuthProvider";
+            //        })
+            //        .AddCookie()
+            //.AddGoogle(options =>
+            //{
+            //    IConfigurationSection googleAuthNSection =
+            //        Configuration.GetSection("Authentication:Google");
 
-        //    options.ClientId = googleAuthNSection["ClientId"];
-        //    options.ClientSecret = googleAuthNSection["ClientSecret"];
-        //})
-        //.AddOAuth("OAuthProvider", options =>
-        //{
-        //    options.ClientId = "254761430313-purnb7pnn4rals57530jsrbsbtggumct.apps.googleusercontent.com";
-        //    // other options here
-        //});
-        //    services.AddHsts(options =>
-        //    {
-        //        options.Preload = true;
-        //        options.IncludeSubDomains = true;
-        //        options.MaxAge = TimeSpan.FromDays(60);
-        //    });
+            //    options.ClientId = googleAuthNSection["ClientId"];
+            //    options.ClientSecret = googleAuthNSection["ClientSecret"];
+            //})
+            //.AddOAuth("OAuthProvider", options =>
+            //{
+            //    options.ClientId = "254761430313-purnb7pnn4rals57530jsrbsbtggumct.apps.googleusercontent.com";
+            //    // other options here
+            //});
+            services.AddHsts(options =>
+            {
+                options.Preload = true;
+                options.IncludeSubDomains = true;
+                options.MaxAge = TimeSpan.FromDays(60);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -104,16 +104,16 @@ namespace Intex2A
                 app.UseHsts();
             }
 
-            //app.UseHsts();
+            app.UseHsts();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseCookiePolicy();
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
             app.Use(async (context, next) => {
-                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self' https://stackpath.bootstrapcdn.com 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://stackpath.bootstrapcdn.com https://fonts.gstatic.com; img-src 'self' https://via.placeholder.com; frame-src 'self'; connect-src  'self'wss://localhost:44391;");
+                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self' https://stackpath.bootstrapcdn.com 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://stackpath.bootstrapcdn.com https://fonts.gstatic.com; img-src 'self' https://via.placeholder.com; frame-src 'self'; connect-src 'self' wss://localhost:44391;");
                 await next();
             });
 
@@ -157,16 +157,16 @@ namespace Intex2A
                 endpoints.MapRazorPages();
             });
 
-            using (var scope = app.ApplicationServices.CreateScope())
-            {
-                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-                var roles = new[] { "Admin", "Manager", "Memeber" };
-                foreach (var role in roles)
-                {
-                    if (!await roleManager.RoleExistsAsync(role))
-                        await roleManager.CreateAsync(new IdentityRole(role));
-                }
-            }
+            //using (var scope = app.ApplicationServices.CreateScope())
+            //{
+            //    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            //    var roles = new[] { "Admin", "Manager", "Memeber" };
+            //    foreach (var role in roles)
+            //    {
+            //        if (!await roleManager.RoleExistsAsync(role))
+            //            await roleManager.CreateAsync(new IdentityRole(role));
+            //    }
+            //}
         }
     }
 }

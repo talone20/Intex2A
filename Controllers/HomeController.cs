@@ -1,9 +1,11 @@
 ﻿using Intex2A.Models;
 using Intex2A.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -47,6 +49,7 @@ namespace Intex2A.Controllers
 
             return View(x);
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             return View();
@@ -57,6 +60,7 @@ namespace Intex2A.Controllers
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
