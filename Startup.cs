@@ -38,7 +38,7 @@ namespace Intex2A
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddScoped<IintexRepository, EFintexRepository>();
@@ -108,21 +108,31 @@ namespace Intex2A
                 app.UseHsts();
             }
 
-            //app.UseHsts();
+            app.UseHsts();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseCookiePolicy();
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
             app.Use(async (context, next) => {
-                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self' https://stackpath.bootstrapcdn.com 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://stackpath.bootstrapcdn.com https://fonts.gstatic.com; img-src 'self' https://via.placeholder.com; frame-src 'self'; connect-src  'self'wss://localhost:44391;");
+                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self' https://stackpath.bootstrapcdn.com 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://stackpath.bootstrapcdn.com https://fonts.gstatic.com; img-src 'self' https://via.placeholder.com; frame-src 'self'; connect-src 'self' wss://localhost:44391;");
                 await next();
             });
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "wrappingpage",
+                    pattern: "{wrapping}/Page{pageNum}",
+                    defaults: new { Controller = "Home", action = "Summary" });
+
+                endpoints.MapControllerRoute(
+                    name: "sexpage",
+                    pattern: "{sex}/Page{pageNum}",
+                    defaults: new { Controller = "Home", action = "Summary" });
+
                 endpoints.MapControllerRoute(
                     name:"Paging",
                     pattern:"Page{pageNum}",
@@ -133,6 +143,16 @@ namespace Intex2A
                 pattern: "Model/Score",
                 defaults: new { Controller = "Inference", action = "Score" });
 
+                endpoints.MapControllerRoute(
+                    name: "wrapping",
+                    pattern: "{wrapping}",
+                    defaults: new { Controller = "Home", action = "Summary", pageNum=1 });
+
+                endpoints.MapControllerRoute(
+                    name: "sex",
+                    pattern: "{sex}",
+                    defaults: new { Controller = "Home", action = "Summary", pageNum = 1 });
+                
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
@@ -150,7 +170,25 @@ namespace Intex2A
             //    }
             //}
 
-          
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var userManager =
+                    scope.ServiceProvider.GetRequiredService<UserManager< IdentityUser >> ();
+
+                string email = "admin@admin.com";
+                string password = "Test1234";
+                
+                if(await userManager.FindByEmailAsync(email) == null)
+                {
+                    var user = new IdentityUser();
+                    user.UserName = email;
+                    user.Email = email;
+
+                    await userManager.CreateAsync(user, password);
+                    await userManager.AddToRoleAsync(user, "Admin");
+                }
+
+            }
         }
     }
 }

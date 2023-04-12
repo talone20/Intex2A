@@ -40,7 +40,7 @@ namespace Intex2A.Infrastructure
         {
             IUrlHelper uh = uhf.GetUrlHelper(vc);
 
-            TagBuilder final = new TagBuilder("div");
+            TagBuilder final = new TagBuilder("span");
 
             for (int i = 1; i < PageBlah.TotalPages; i++)
             {
