@@ -1,5 +1,6 @@
 ﻿using Intex2A.Models;
 using Intex2A.Models.ViewModels;
+using Intex2A.Models.PredictionModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -78,6 +79,15 @@ namespace Intex2A.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        public IActionResult PredictWrapping()
+        {
+            return View();
+        }
+        public IActionResult ScoreOutput(Prediction temp)
+        {
+            var prediction = temp;
+            return View(prediction);
         }
     }
 }
