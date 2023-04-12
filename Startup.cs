@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.ML.OnnxRuntime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -81,12 +82,15 @@ namespace Intex2A
             //    options.ClientId = "254761430313-purnb7pnn4rals57530jsrbsbtggumct.apps.googleusercontent.com";
             //    // other options here
             //});
-            services.AddHsts(options =>
-            {
-                options.Preload = true;
-                options.IncludeSubDomains = true;
-                options.MaxAge = TimeSpan.FromDays(60);
-            });
+            //    services.AddHsts(options =>
+            //    {
+            //        options.Preload = true;
+            //        options.IncludeSubDomains = true;
+            //        options.MaxAge = TimeSpan.FromDays(60);
+            //    });
+            services.AddSingleton<InferenceSession>(
+                new InferenceSession("Model/my_model.onnx")
+              );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -132,7 +136,12 @@ namespace Intex2A
                 endpoints.MapControllerRoute(
                     name:"Paging",
                     pattern:"Page{pageNum}",
-                    defaults: new { Controller="Home", action="Summary", pageNum=1});
+                    defaults: new { Controller="Home", action="Index"}
+                    );
+                endpoints.MapControllerRoute(
+                name: "score",
+                pattern: "Model/Score",
+                defaults: new { Controller = "Inference", action = "Score" });
 
                 endpoints.MapControllerRoute(
                     name: "wrapping",
@@ -180,7 +189,6 @@ namespace Intex2A
                 }
 
             }
-            
         }
     }
 }

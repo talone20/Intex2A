@@ -1,0 +1,110 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Intex2A.Models.PredictionModels.ModelData
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+   
+    $(function () {
+        $('form').submit(function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Send AJAX POST request to controller endpoint
+            $.ajax({
+                url: '/Inference/Score',
+                type: 'POST',
+                data: $('form').serialize(),
+                contentType: 'application/x-www-form-urlencoded',
+                success: function (response) {
+                    @*var prediction = JSON.parse(response);
+                    var resultDiv = document.getElementById("result");
+                    resultDiv.innerHTML = "Predicted value: " + prediction.predictedValue;*@
+                    $('#form-container').replaceWith(response);
+                    // Handle successful response from controller
+                },
+                error: function (xhr, status, error) {
+                    // Handle error response from controller
+                }
+            });
+        });
+    });
+</script>
+
+<div>
+    <div>
+        <h1 class="text-center" style="margin:auto">Predict the Wrapping of the mummy in any given Burial</h1> <br /> <br />
+    </div>
+    <form asp-controller="Inference" asp-action="Score" method="post" id="WrappingForm" name="WrappingForm">
+        <div class="row">
+            <div class="col-6 text-center">
+                <label class="font-weight-bold" asp-for="AgeAtDeath_A">Age at Death:</label> <br />
+                <label><input type="radio" asp-for="AgeAtDeath_A" name="age" value="1" required/>Adult</label>
+                <label><input type="radio" asp-for="AgeAtDeath_C" name="age" value="1" required/>Child</label>
+                <label><input type="radio" asp-for="AgeAtDeath_I" name="age" value="1" required/>Infant</label>
+                <label><input type="radio" asp-for="AgeAtDeath_N" name="age" value="1" required/>Newborn</label>
+                <br />
+                <label class="font-weight-bold" asp-for="NorthSouth_N">North-South</label> <br />
+                <label><input type="radio" asp-for="NorthSouth_N" name="north" value="1" required/>North</label>
+                <label><input type="radio" asp-for="NorthSouth_N" name="north" value="0" required/>South</label>
+                <input type="hidden" asp-for="NorthSouth_N" name="north" value="0" class="form-control">
+                <br />
+                <label class="font-weight-bold" asp-for="EastWest_E">East-West:</label> <br />
+                <label><input type="radio" asp-for="EastWest_E" name="east_E" value="1" required/>East</label>
+                <label><input type="radio" asp-for="EastWest_W" name="east_E" value="0" required/>West</label>
+                <input type="hidden" asp-for="EastWest_W" name="east_W" value="0" class="form-control">
+                <input type="hidden" asp-for="EastWest_E" name="east_E" value="0" class="form-control">
+                <br />
+                <label class="font-weight-bold" asp-for="Area_NE">Area NorthEast:</label> <br />
+                <label><input type="radio" asp-for="Area_NE" name="northeast" value="1" required/>Yes</label>
+                <label><input type="radio" asp-for="Area_NE" name="northeast" value="0" required/>No</label>
+                <input type="hidden" asp-for="Area_NE" name="northeast" value="0" class="form-control">
+                <br />
+                <label class="font-weight-bold" asp-for="Area_SE">Area SouthEast:</label> <br />
+                <label><input type="radio" asp-for="Area_SE" name="southeast" value="1" required/>Yes</label>
+                <label><input type="radio" asp-for="Area_SE" name="southeast" value="0" required/>No</label>
+                <input type="hidden" asp-for="Area_SE" name="southeast" value="0" class="form-control">
+                <br />
+                <label class="font-weight-bold" asp-for="Area_SW">Area SouthWest:</label> <br />
+                <label><input type="radio" asp-for="Area_SW" name="southwest" value="1" required/>Yes</label>
+                <label><input type="radio" asp-for="Area_SW" name="southwest" value="0" required/>No</label>
+                <input type="hidden" asp-for="Area_SW" name="southwest" value="0" class="form-control">
+                <br />
+                <label class="font-weight-bold" asp-for="FaceBundles">Face Bundles:</label> <br />
+                <label><input type="radio" asp-for="FaceBundles" name="face-bundles" value="1" required/>Yes</label>
+                <label><input type="radio" asp-for="FaceBundles" name="face-bundles" value="0" required/>No</label>
+                <input type="hidden" asp-for="FaceBundles" name="face-bundles" value="0" class="form-control">
+                <br />
+                <label class="font-weight-bold" asp-for="Goods">Goods:</label> <br />
+                <label><input type="radio" asp-for="Goods" name="goods" value="1" required/>Yes</label>
+                <label><input type="radio" asp-for="Goods" name="goods" value="0" required/>No</label>
+                <input type="hidden" asp-for="Goods" name="goods" value="0" class="form-control">
+                <br />
+            </div>
+            <div class="col-6 text-center">
+                <label class="font-weight-bold" asp-for="Depth">Depth:</label>
+                <input asp-for="Depth" class="form-control" name="Depth" step="0.1" required>
+                <br />
+                <label class="font-weight-bold" asp-for="SouthToHead">South to Head:</label>
+                <input asp-for="SouthToHead" class="form-control" name="SouthToHead" step="0.1" required>
+                <br />
+                <label class="font-weight-bold" asp-for="SquareEastWest">Square East West:</label>
+                <input asp-for="SquareEastWest" class="form-control" name="SquareEastWest" step="0.1" required>
+                <br />
+                <label class="font-weight-bold" asp-for="WestToHead">West to Head:</label>
+                <input asp-for="WestToHead" class="form-control" name="WestToHead" step="0.1" required>
+                <br />
+                <label class="font-weight-bold" asp-for="WestToFeet">West to Feet:</label>
+                <input asp-for="WestToFeet" class="form-control" name="WestToFeet" step="0.1" required>
+                <br />
+                <label class="font-weight-bold" asp-for="SouthToFeet">South to Feet:</label>
+                <input asp-for="SouthToFeet" class="form-control" name="SouthToFeet" step="0.1" required>
+                <br />
+            </div>
+        </div>
+        <div class="text-center">
+            <button type="submit">Submit</button>
+        </div>
+        <br/>
+        <br/>
+    </form>
+</div>
