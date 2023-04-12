@@ -37,7 +37,7 @@ namespace Intex2A
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddScoped<IintexRepository, EFintexRepository>();
@@ -143,14 +143,7 @@ namespace Intex2A
                     name: "sex",
                     pattern: "{sex}",
                     defaults: new { Controller = "Home", action = "Summary", pageNum = 1 });
-
-
-
-
-
-
-
-
+                
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
@@ -167,6 +160,27 @@ namespace Intex2A
             //            await roleManager.CreateAsync(new IdentityRole(role));
             //    }
             //}
+
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var userManager =
+                    scope.ServiceProvider.GetRequiredService<UserManager< IdentityUser >> ();
+
+                string email = "admin@admin.com";
+                string password = "Test1234";
+                
+                if(await userManager.FindByEmailAsync(email) == null)
+                {
+                    var user = new IdentityUser();
+                    user.UserName = email;
+                    user.Email = email;
+
+                    await userManager.CreateAsync(user, password);
+                    await userManager.AddToRoleAsync(user, "Admin");
+                }
+
+            }
+            
         }
     }
 }
