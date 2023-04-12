@@ -55,10 +55,12 @@ namespace Intex2A.Controllers
             return View();
         }
 
-        public IActionResult Edit()
-        {
-            return View();
-        }
+        //public IActionResult Edit(int id)
+        //{
+        //    //var burial = dataContext.publicburial Single(x => x.Id == id);
+
+        //    //return View(Edit);
+        //}
 
         public IActionResult Delete ()
         {

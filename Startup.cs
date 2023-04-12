@@ -150,36 +150,36 @@ namespace Intex2A
                 endpoints.MapRazorPages();
             });
 
-            //using (var scope = app.ApplicationServices.CreateScope())
-            //{
-            //    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            //    var roles = new[] { "Admin", "Manager", "Memeber" };
-            //    foreach (var role in roles)
-            //    {
-            //        if (!await roleManager.RoleExistsAsync(role))
-            //            await roleManager.CreateAsync(new IdentityRole(role));
-            //    }
-            //}
-
             using (var scope = app.ApplicationServices.CreateScope())
             {
-                var userManager =
-                    scope.ServiceProvider.GetRequiredService<UserManager< IdentityUser >> ();
-
-                string email = "admin@admin.com";
-                string password = "Test1234";
-                
-                if(await userManager.FindByEmailAsync(email) == null)
+                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                var roles = new[] { "Administrator", "Managers", "Member" };
+                foreach (var role in roles)
                 {
-                    var user = new IdentityUser();
-                    user.UserName = email;
-                    user.Email = email;
-
-                    await userManager.CreateAsync(user, password);
-                    await userManager.AddToRoleAsync(user, "Admin");
+                    if (!await roleManager.RoleExistsAsync(role))
+                        await roleManager.CreateAsync(new IdentityRole(role));
                 }
-
             }
+
+            //using (var scope = app.ApplicationServices.CreateScope())
+            //{
+            //    var userManager =
+            //        scope.ServiceProvider.GetRequiredService<UserManager< IdentityUser >> ();
+
+            //    string email = "admin@admin.com";
+            //    string password = "Test1234";
+                
+            //    if(await userManager.FindByEmailAsync(email) == null)
+            //    {
+            //        var user = new IdentityUser();
+            //        user.UserName = email;
+            //        user.Email = email;
+
+            //        await userManager.CreateAsync(user, password);
+            //        await userManager.AddToRoleAsync(user, "Administrator");
+            //    }
+
+            //}
             
         }
     }
