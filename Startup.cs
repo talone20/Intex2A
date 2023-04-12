@@ -144,13 +144,6 @@ namespace Intex2A
                     pattern: "{sex}",
                     defaults: new { Controller = "Home", action = "Summary", pageNum = 1 });
 
-
-
-
-
-
-
-
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

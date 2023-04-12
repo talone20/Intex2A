@@ -49,11 +49,23 @@ namespace Intex2A.Controllers
 
             return View(x);
         }
-        [Authorize(Roles = "Admin")]
+        
         public IActionResult Index()
         {
             return View();
         }
+
+        public IActionResult Edit()
+        {
+            return View();
+        }
+
+        public IActionResult Delete ()
+        {
+            return View ();
+        }
+
+        [Authorize]
         public IActionResult Privacy()
         {
             return View();
