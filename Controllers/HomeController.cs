@@ -1,5 +1,6 @@
 ﻿using Intex2A.Models;
 using Intex2A.Models.ViewModels;
+using Intex2A.Models.PredictionModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -57,6 +58,11 @@ namespace Intex2A.Controllers
         public IActionResult PredictWrapping()
         {
             return View();
+        }
+        public IActionResult ScoreOutput(Prediction temp)
+        {
+            var prediction = temp;
+            return View(prediction);
         }
     }
 }

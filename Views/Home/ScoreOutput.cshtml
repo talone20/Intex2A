@@ -1,0 +1,38 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Intex2A.Models.PredictionModels.Prediction
+
+<div class="container-fluid" style="height:max-content">
+    <div class="row">
+        <div class="col-3">
+        </div>
+        <div class="col-6 text-center">
+            <h1>Based on the data given, we can predict: </h1>
+
+            @if (Model.PredictedValue == "W")
+            {
+                <h2>The body will be FULLY COVERED in wrapping</h2>
+            }
+            else if (Model.PredictedValue == "B")
+            {
+                <h2>The BONES will be covered in wrapping</h2>
+            }
+            else if (Model.PredictedValue == "S")
+            {
+                <h2>There will be NO WRAPPING on the body</h2>
+            }
+            else if (Model.PredictedValue == "H")
+            {
+                <h2>The body will be PARTIALLY COVERED in wrapping</h2>
+            }
+
+            <h3><a asp-controller="Home" asp-action="PredictWrapping">Make another prediction</a></h3>
+        </div>
+        <div class="col-3">
+
+        </div>
+    </div>
+</div>

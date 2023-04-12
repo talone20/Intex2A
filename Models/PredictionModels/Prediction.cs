@@ -2,6 +2,6 @@
 {
     public class Prediction
     {
-        public float PredictedValue { get; set; }
+        public string PredictedValue { get; set; }
     }
 }

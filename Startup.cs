@@ -89,7 +89,7 @@ namespace Intex2A
             //        options.MaxAge = TimeSpan.FromDays(60);
             //    });
             services.AddSingleton<InferenceSession>(
-                new InferenceSession("Model/my_model.onnx1")
+                new InferenceSession("Model/my_model.onnx")
               );
         }
 
@@ -128,6 +128,10 @@ namespace Intex2A
                     pattern:"Page{pageNum}",
                     defaults: new { Controller="Home", action="Index"}
                     );
+                endpoints.MapControllerRoute(
+                name: "score",
+                pattern: "Model/Score",
+                defaults: new { Controller = "Inference", action = "Score" });
 
                 endpoints.MapControllerRoute(
                     name: "default",
