@@ -170,25 +170,25 @@ namespace Intex2A
             //    }
             //}
 
-            using (var scope = app.ApplicationServices.CreateScope())
-            {
-                var userManager =
-                    scope.ServiceProvider.GetRequiredService<UserManager< IdentityUser >> ();
+            //using (var scope = app.ApplicationServices.CreateScope())
+            //{
+            //    var userManager =
+            //        scope.ServiceProvider.GetRequiredService<UserManager< IdentityUser >> ();
 
-                string email = "admin@admin.com";
-                string password = "Test1234";
+            //    string email = "admin@admin.com";
+            //    string password = "Test1234";
                 
-                if(await userManager.FindByEmailAsync(email) == null)
-                {
-                    var user = new IdentityUser();
-                    user.UserName = email;
-                    user.Email = email;
+            //    if(await userManager.FindByEmailAsync(email) == null)
+            //    {
+            //        var user = new IdentityUser();
+            //        user.UserName = email;
+            //        user.Email = email;
 
-                    await userManager.CreateAsync(user, password);
-                    await userManager.AddToRoleAsync(user, "Admin");
-                }
+            //        await userManager.CreateAsync(user, password);
+            //        await userManager.AddToRoleAsync(user, "Admin");
+            //    }
 
-            }
+            //}
         }
     }
 }
