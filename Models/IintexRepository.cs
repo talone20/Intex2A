@@ -9,5 +9,7 @@ namespace Intex2A.Models
     public interface IintexRepository
     {
         IQueryable<PublicBurialmain> Burials { get; }
+
+        public void SaveBurial(PublicBurialmain burial);
     }
 }

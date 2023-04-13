@@ -14,5 +14,11 @@ namespace Intex2A.Models
             context = temp;
         }
         public IQueryable<PublicBurialmain> Burials => context.PublicBurialmain;
+
+        public void SaveBurial(PublicBurialmain burial)
+        {
+            context.Add(burial);
+            context.SaveChanges();
+        }
     }
 }

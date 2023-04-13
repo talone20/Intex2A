@@ -94,7 +94,7 @@ namespace Intex2A
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public async void Configure (IApplicationBuilder app, IWebHostEnvironment env)
+        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -116,7 +116,8 @@ namespace Intex2A
 
             app.UseAuthentication();
             app.UseAuthorization();
-            app.Use(async (context, next) => {
+            app.Use(async (context, next) =>
+            {
                 context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self' https://stackpath.bootstrapcdn.com 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://stackpath.bootstrapcdn.com https://fonts.gstatic.com; img-src 'self' https://via.placeholder.com; frame-src 'self'; connect-src 'self' wss://localhost:44391;");
                 await next();
             });
@@ -134,9 +135,9 @@ namespace Intex2A
                     defaults: new { Controller = "Home", action = "Summary" });
 
                 endpoints.MapControllerRoute(
-                    name:"Paging",
-                    pattern:"Page{pageNum}",
-                    defaults: new { Controller="Home", action="Index"}
+                    name: "Paging",
+                    pattern: "Page{pageNum}",
+                    defaults: new { Controller = "Home", action = "Index" }
                     );
                 endpoints.MapControllerRoute(
                 name: "score",
@@ -146,13 +147,13 @@ namespace Intex2A
                 endpoints.MapControllerRoute(
                     name: "wrapping",
                     pattern: "{wrapping}",
-                    defaults: new { Controller = "Home", action = "Summary", pageNum=1 });
+                    defaults: new { Controller = "Home", action = "Summary", pageNum = 1 });
 
                 endpoints.MapControllerRoute(
                     name: "sex",
                     pattern: "{sex}",
                     defaults: new { Controller = "Home", action = "Summary", pageNum = 1 });
-                
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
@@ -177,7 +178,7 @@ namespace Intex2A
 
             //    string email = "admin@admin.com";
             //    string password = "Test1234";
-                
+
             //    if(await userManager.FindByEmailAsync(email) == null)
             //    {
             //        var user = new IdentityUser();
@@ -187,8 +188,8 @@ namespace Intex2A
             //        await userManager.CreateAsync(user, password);
             //        await userManager.AddToRoleAsync(user, "Administrator");
             //    }
-
+        
             }
         }
     }
-}
+
