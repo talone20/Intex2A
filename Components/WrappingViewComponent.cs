@@ -21,7 +21,7 @@ namespace Intex2A.Components
             ViewBag.SelectedWrapping = RouteData?.Values["wrapping"];
 
             var wrappings = repo.Burials
-                .Select(x => x.Wrapping)
+                .Select(x => x.wrapping)
                 .Distinct()
                 .OrderBy(x => x);
 

@@ -9,14 +9,9 @@ namespace Intex2A.Models
 {
     public class IntexDbContext : DbContext
     {
-        private readonly IConfiguration _configuration;
-        public IntexDbContext(IConfiguration configuration)
+
+        public IntexDbContext()
         {
-            _configuration = configuration;
-        }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseNpgsql(_configuration.GetConnectionString("DefaultConnection"));
         }
 
         public IntexDbContext(DbContextOptions<IntexDbContext> options)
@@ -24,7 +19,15 @@ namespace Intex2A.Models
         {
         }
 
-        public DbSet<BurialMain> Burials { get; set; }
+        public DbSet<burialmain> Burials { get; set; }
+        
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseNpgsql("DefaultConnection");
+            }
+        }
 
     }
 }

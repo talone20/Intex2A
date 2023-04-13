@@ -8,6 +8,6 @@ namespace Intex2A.Models
 {
     public interface IintexRepository
     {
-        IQueryable<BurialMain> Burials { get; }
+        IQueryable<burialmain> Burials { get; }
     }
 }

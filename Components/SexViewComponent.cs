@@ -21,7 +21,7 @@ namespace Intex2A.Components
             ViewBag.SelectedSex = RouteData?.Values["sex"];
 
             var sexes = repo.Burials
-                .Select(x => x.Sex)
+                .Select(x => x.sex)
                 .Distinct()
                 .OrderBy(x => x);
 

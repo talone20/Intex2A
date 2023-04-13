@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Summary Page";
 }
-@model BurialsViewModel
+@model List<burialmain>
 
 
     <div class="row m-1 p-1">
@@ -17,7 +17,7 @@
 
         <div class="col-9">
             <div>
-                @foreach (PublicBurialmain Bm in Model.Burials)
+                @foreach (burialmain Bm in Model)
                 {
                     <partial name="BurialSummary" model="Bm" />
                 }
@@ -26,8 +26,9 @@
         </div>
     </div>
 
-    <div page-blah="@Model.PageInfo" page-action="Summary" page-class="btn"
+@*    <div page-blah="@Model.PageInfo" page-action="Summary" page-class="btn"
          page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
          page-classes-enabled="true" class="">
 
     </div>
+*@

@@ -6,44 +6,44 @@ using System.Threading.Tasks;
 
 namespace Intex2A.Models
 {
-    public partial class BurialMain
+    public partial class burialmain
     {
         [Key]
         [Required]
-        public double Id { get; set; }
-        public string Squarenorthsouth { get; set; }
-        public string Headdirection { get; set; }
-        public string Sex { get; set; }
-        public string Northsouth { get; set; }
-        public string Depth { get; set; }
-        public string Eastwest { get; set; }
-        public string Adultsubadult { get; set; }
-        public string Facebundles { get; set; }
-        public string Southtohead { get; set; }
-        public string Preservation { get; set; }
-        public string Fieldbookpage { get; set; }
-        public string Squareeastwest { get; set; }
-        public string Goods { get; set; }
-        public string Text { get; set; }
-        public string Wrapping { get; set; }
-        public string Haircolor { get; set; }
-        public string Westtohead { get; set; }
-        public string Samplescollected { get; set; }
-        public string Area { get; set; }
-        public long Burialid { get; set; }
-        public string Length { get; set; }
-        public string Burialnumber { get; set; }
-        public string Dataexpertinitials { get; set; }
-        public string Westtofeet { get; set; }
-        public string Ageatdeath { get; set; }
-        public string Southtofeet { get; set; }
-        public string Excavationrecorder { get; set; }
-        public string Photos { get; set; }
-        public string Hair { get; set; }
-        public string Burialmaterials { get; set; }
-        public TimeSpan Dateofexcavation { get; set; }
-        public string Fieldbookexcavationyear { get; set; }
-        public string Clusternumber { get; set; }
-        public string Shaftnumber { get; set; }
+        public double id { get; set; }
+        public string? squarenorthsouth { get; set; }
+        public string? headdirection { get; set; }
+        public string? sex { get; set; }
+        public string? northsouth { get; set; }
+        public string? depth { get; set; }
+        public string? eastwest { get; set; }
+        public string? adultsubadult { get; set; }
+        public string? facebundles { get; set; }
+        public string? southtohead { get; set; }
+        public string? preservation { get; set; }
+        public string? fieldbookpage { get; set; }
+        public string? squareeastwest { get; set; }
+        public string? goods { get; set; }
+        public string? text { get; set; }
+        public string? wrapping { get; set; }
+        public string? haircolor { get; set; }
+        public string? westtohead { get; set; }
+        public string? samplescollected { get; set; }
+        public string? area { get; set; }
+        public long? burialid { get; set; }
+        public string? length { get; set; }
+        public string? burialnumber { get; set; }
+        public string? dataexpertinitials { get; set; }
+        public string? westtofeet { get; set; }
+        public string? ageatdeath { get; set; }
+        public string? southtofeet { get; set; }
+        public string? excavationrecorder { get; set; }
+        public string? photos { get; set; }
+        public string? hair { get; set; }
+        public string? burialmaterials { get; set; }
+        public TimeSpan? dateofexcavation { get; set; }
+        public string? fieldbookexcavationyear { get; set; }
+        public string? clusternumber { get; set; }
+        public string? shaftnumber { get; set; }
     }
 }

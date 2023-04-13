@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Intex2A.Models
 {
-    [ApiController]
+/*    [ApiController]*/
     public class EFintexRepository : IintexRepository
     {
         private IntexDbContext context { get; set; }
@@ -16,6 +16,6 @@ namespace Intex2A.Models
         {
             context = temp;
         }
-        public IQueryable<BurialMain> Burials => context.Burials;
+        public IQueryable<burialmain> Burials => context.Burials;
     }
 }

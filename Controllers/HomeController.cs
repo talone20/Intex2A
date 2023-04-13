@@ -19,17 +19,19 @@ namespace Intex2A.Controllers
 
         private IintexRepository repo;
 
-        public HomeController(ILogger<HomeController> logger, IintexRepository temp)
+        public HomeController(/*ILogger<HomeController> logger, */IintexRepository temp)
         {
             repo = temp;
-            _logger = logger;
+/*            _logger = logger;*/
         }
 
-        public IActionResult Summary(int pageNum = 1)
+        public IActionResult Summary(/*int pageNum = 1*/)
         {
-            int pageSize = 10;
+            /*int pageSize = 10;*/
 
-            return View();
+            var burials = repo.Burials.ToList();
+
+            return View(burials);
         }
         
         public IActionResult Index()

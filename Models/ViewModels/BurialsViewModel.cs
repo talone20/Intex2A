@@ -7,7 +7,7 @@ namespace Intex2A.Models.ViewModels
 {
     public class BurialsViewModel
     {
-        public IQueryable<BurialMain> Burials { get; set; }
+        public IQueryable<burialmain> Burials { get; set; }
 
         public PageInfo PageInfo { get; set; }
     }
