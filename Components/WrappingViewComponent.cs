@@ -18,14 +18,14 @@ namespace Intex2A.Components
 
         public IViewComponentResult Invoke()
         {
-            ViewBag.SelectedWrapping = RouteData?.Values["wrapping"];
+ /*           ViewBag.SelectedWrapping = RouteData?.Values["wrapping"];
 
             var wrappings = repo.Burials
                 .Select(x => x.wrapping)
                 .Distinct()
                 .OrderBy(x => x);
-
-            return View(wrappings);
+*/
+            return View();
         }
     }
 }

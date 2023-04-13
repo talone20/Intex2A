@@ -29,8 +29,11 @@ namespace Intex2A.Controllers
         {
             /*int pageSize = 10;*/
 
-            var burials = repo.Burials.ToList();
 
+            // Execute the query and store the results in a list of objects
+            var burials = repo.Burials.ToList<burialmain>();
+
+            // Pass the list of objects to the view for display
             return View(burials);
         }
         

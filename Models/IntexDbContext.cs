@@ -28,6 +28,11 @@ namespace Intex2A.Models
                 optionsBuilder.UseNpgsql("DefaultConnection");
             }
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.HasDefaultSchema("public");
+            modelBuilder.Entity<burialmain>().ToTable("burialmain");
+        }
 
     }
 }
