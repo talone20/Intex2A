@@ -88,9 +88,9 @@ namespace Intex2A
             //        options.IncludeSubDomains = true;
             //        options.MaxAge = TimeSpan.FromDays(60);
             //    });
-            services.AddSingleton<InferenceSession>(
-                new InferenceSession("Model/my_model.onnx")
-              );
+            //services.AddSingleton<InferenceSession>(
+            //    new InferenceSession("Model/my_model.onnx")
+            //  );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -117,7 +117,7 @@ namespace Intex2A
             app.UseAuthentication();
             app.UseAuthorization();
             app.Use(async (context, next) => {
-                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self' https://stackpath.bootstrapcdn.com 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://stackpath.bootstrapcdn.com https://fonts.gstatic.com; img-src 'self' https://via.placeholder.com; frame-src 'self'; connect-src 'self' wss://localhost:44391;");
+                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' ; style-src 'self' 'unsafe-inline' https://stackpath.bootstrapcdn.com  https://fonts.googleapis.com; font-src 'self' https://stackpath.bootstrapcdn.com https://fonts.gstatic.com; img-src 'self' https://via.placeholder.com; frame-src 'self'; connect-src 'self' wss://localhost:44391;");
                 await next();
             });
 
