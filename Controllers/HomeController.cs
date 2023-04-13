@@ -25,30 +25,11 @@ namespace Intex2A.Controllers
             _logger = logger;
         }
 
-        public IActionResult Summary(string wrapping, string sex, int pageNum = 1)
+        public IActionResult Summary(int pageNum = 1)
         {
             int pageSize = 10;
 
-            var x = new BurialsViewModel
-            {
-                Burials = repo.Burials
-                .Where(x => (x.Wrapping == wrapping || wrapping == null) && (x.Sex == sex || sex == null))
-                .OrderBy(x => x.Id)
-                .Skip((pageNum - 1) * pageSize)
-                .Take(pageSize),
-
-                PageInfo = new PageInfo
-                {
-                    TotalNumBurials = (wrapping == null && sex == null ? repo.Burials.Count() 
-                    : (wrapping == null && sex != null ? repo.Burials.Where(x => x.Sex == sex).Count()
-                    : (wrapping != null && sex == null ? repo.Burials.Where(x => x.Wrapping == wrapping).Count()
-                    : repo.Burials.Where(x => x.Wrapping == wrapping && x.Sex == sex).Count()))),
-                    BurialsPerPage = pageSize,
-                    CurrentPage = pageNum
-                }
-            };
-
-            return View(x);
+            return View();
         }
         
         public IActionResult Index()
