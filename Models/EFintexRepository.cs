@@ -16,6 +16,6 @@ namespace Intex2A.Models
         {
             context = temp;
         }
-        public IQueryable<burialmain> Burials => context.Burials;
+        public IQueryable<burialmain> Burials => context.Set<burialmain>();
     }
 }
