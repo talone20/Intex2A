@@ -1,0 +1,37 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - The Mummy Project</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+    <body>
+        <nav style="background-color:darkgrey">
+            <ul>
+                <li>
+                    <a href="">Home</a>
+                </li>
+                <li>
+                    <a asp-controller="Home" asp-action="Summary">Burial Information</a>
+                </li>
+                <li>
+                    <a asp-controller="Home" asp-action="PredictWrapping">Supervised</a>
+                </li>
+                <li>
+                    <a href="">Unsupervised</a>
+                </li>
+                <li>
+                    <partial name="_LoginPartial" />
+                </li>
+            </ul>
+        </nav>
+            @RenderBody()
+    </body>
+</html>

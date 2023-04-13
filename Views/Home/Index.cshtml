@@ -1,4 +1,79 @@
-﻿<style>
+﻿
+<div class="hero">
+    <div class="bar">
+        <img src="~/lib/image/logo.png" class="logo">
+        <nav>
+            <ul>
+                <li>
+                    <a href="">Home</a>
+                </li>
+                <li>
+                    <a asp-controller="Home" asp-action="Summary">Burial Information</a>
+                </li>
+                <li>
+                    <a asp-controller="Home" asp-action="PredictWrapping">Supervised</a>
+                </li>
+                <li>
+                    <a href="">Unsupervised</a>
+                </li>
+                <li>
+                    <partial name="_LoginPartial" />
+                </li>
+
+            </ul>
+        </nav>
+
+    </div>
+    <div class="row">
+        <div class="col">
+            <h1>Fag el-Gamous</h1>
+            <p>Discover the secrets of ancient Egypt through the fascinating Fag el-Gamous mummies, unveiling their hidden stories and illuminating the past.</p>
+            <a class="btn btn-outline-light" asp-controller="Home" asp-action="Summary">Information about dead egyptians.</a>
+        </div>
+        <div class="col">
+            <div class="card card1">
+                <h5>Supervised</h5>
+                <p>Click here to view the results of our supervised machine learning models</p>
+            </div>
+            <div class="card card2">
+                <h5>Unsupervised</h5>
+                <p>Here you can view the results of our unsepervised machine learning models</p>
+            </div>
+            <div class="card card3">
+                <a asp-controller="Home" asp-action="Summary">
+                    <h5>Mummy Data</h5>
+                    <p>Click here to view a summary of all mummies found!</p>
+                </a>
+            </div>
+            <div class="card card4">
+                <a class="privacy" href="https://www.privacypolicies.com/live/120101d1-7213-4403-933f-73eb70db8ccc">
+                    <h5>Privacy</h5>
+                    <p>And finally, we present the most interesting privacy laws on this side of the atlantic ocean!!</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div> 
+
+<div class="container my-5 section-container">
+    <div class="row">
+        <!-- Left column -->
+        <div class="col-md-6">
+            <h2 class="section-title">Journey into the World of Ancient Egyptian Mummies</h2>
+            <p class="section-text">
+                Fag el-Gamous, a significant Egyptian cemetery, has been the subject of extensive archaeological investigation for over 25 years. This research, led by BYU experts, has uncovered more than 1,000 mummies,
+                shedding light on burial practices and providing valuable insights into ancient Egyptian life. With data collected from excavations and offsite analyses,
+                the project has contributed to our understanding of mummy characteristics, burial items, and techniques used in their preservation.
+            </p>
+            <a href="#" class="section-btn">Learn More</a>
+        </div>
+
+        <!-- Right column -->
+        <div class="col-md-6">
+            <img src="~/lib/image/fag-el-gamous.jpg" alt="Sample image" class="img-fluid rounded-image">
+        </div>
+    </div>
+<style>
     * {
         margin: 0;
         padding: 0;
@@ -45,17 +120,17 @@
         text-align: right;
     }
 
-    nav ul li {
-        list-style: none;
-        display: inline-block;
-        margin-left: 60px;
-    }
+        nav ul li {
+            list-style: none;
+            display: inline-block;
+            margin-left: 60px;
+        }
 
-    nav ul li a {
-        text-decoration: none;
-        color: #fff;
-        font-size: 13px;
-    }
+            nav ul li a {
+                text-decoration: none;
+                color: #fff;
+                font-size: 13px;
+            }
 
     .row {
         display: flex;
@@ -144,15 +219,15 @@
         position: relative;
     }
 
-    .section-title::after {
-        content: '';
-        position: absolute;
-        bottom: -10px;
-        left: 0;
-        width: 50px;
-        height: 4px;
-        background-color: #b86100;
-    }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background-color: #b86100;
+        }
 
     .section-text {
         font-size: 18px;
@@ -186,83 +261,7 @@
         transition: transform 0.3s;
     }
 
-    .rounded-image:hover {
-        transform: scale(1.05);
-    }
+        .rounded-image:hover {
+            transform: scale(1.05);
+        }
 </style>
-
-<div class="hero">
-    <div class="bar">
-        <img src="~/lib/image/logo.png" class="logo">
-        <nav>
-            <ul>
-                <li>
-                    <a href="">Home</a>
-                </li>
-                <li>
-                    <a asp-controller="Home" asp-action="Summary">Burial Information</a>
-                </li>
-                <li>
-                    <a asp-controller="Home" asp-action="PredictWrapping">Supervised</a>
-                </li>
-                <li>
-                    <a href="">Unsupervised</a>
-                </li>
-                <li>
-                   <partial name="_LoginPartial" />
-                </li>
-                
-            </ul>
-        </nav>
-
-    </div>
-    <div class="row">
-        <div class="col">
-            <h1>Fag el-Gamous</h1>
-            <p>Discover the secrets of ancient Egypt through the fascinating Fag el-Gamous mummies, unveiling their hidden stories and illuminating the past.</p>
-            <a class="btn btn-outline-light" asp-controller="Home" asp-action="Summary">Information about dead egyptians.</a>
-        </div>
-        <div class="col">
-            <div class="card card1">
-                <h5>Supervised</h5>
-                <p>Click here to view the results of our supervised machine learning models</p>
-            </div>
-            <div class="card card2">
-                <h5>Unsupervised</h5>
-                <p>Here you can view the results of our unsepervised machine learning models</p>
-            </div>
-            <div class="card card3">
-                <a asp-controller="Home" asp-action="Summary">
-                    <h5>Mummy Data</h5>
-                    <p>Click here to view a summary of all mummies found!</p>
-                </a>
-            </div>
-            <div class="card card4">
-                <a class="privacy" href="https://www.privacypolicies.com/live/120101d1-7213-4403-933f-73eb70db8ccc">
-                    <h5>Privacy</h5>
-                    <p>And finally, we present the most interesting privacy laws on this side of the atlantic ocean!!</p>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="container my-5 section-container">
-    <div class="row">
-        <!-- Left column -->
-        <div class="col-md-6">
-            <h2 class="section-title">Journey into the World of Ancient Egyptian Mummies</h2>
-            <p class="section-text">
-                Fag el-Gamous, a significant Egyptian cemetery, has been the subject of extensive archaeological investigation for over 25 years. This research, led by BYU experts, has uncovered more than 1,000 mummies,
-                shedding light on burial practices and providing valuable insights into ancient Egyptian life. With data collected from excavations and offsite analyses,
-                the project has contributed to our understanding of mummy characteristics, burial items, and techniques used in their preservation.
-            </p>
-            <a href="#" class="section-btn">Learn More</a>
-        </div>
-
-        <!-- Right column -->
-        <div class="col-md-6">
-            <img src="~/lib/image/fag-el-gamous.jpg" alt="Sample image" class="img-fluid rounded-image">
-        </div>
-    </div>
