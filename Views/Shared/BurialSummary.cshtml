@@ -1,21 +1,21 @@
 ﻿@{
 }
-@model PublicBurialmain
+@model burialmain
 
 
     <div class="card card-outline-primary m-1 p-1">
         <div class="bg-light p-1">
-            <h5>Burial ID: @Model.Id</h5>
+            <h5>Burial ID: @Model.id</h5>
     </div>
     <ul>
-        <li>Preservation: @Model.Preservation</li>
-        <li>Text: @Model.Text</li>
-        <li>Hair Color: @Model.Haircolor</li>
-        <li>Wrapping: @Model.Wrapping</li>
-        <li>Sex: @Model.Sex</li>
-        <li>Age at Death: @Model.Ageatdeath </li>
-        <li>Facebundles: @Model.Facebundles</li>
+        <li>Preservation: @Model.preservation</li>
+        <li>Text: @Model.text</li>
+        <li>Hair Color: @Model.haircolor</li>
+        <li>Wrapping: @Model.wrapping</li>
+        <li>Sex: @Model.sex</li>
+        <li>Age at Death: @Model.ageatdeath </li>
+        <li>Facebundles: @Model.facebundles</li>
     </ul>
-        <h5><a asp-controller="Home" asp-action="Edit" asp-route-id="@Model.Id">Edit</a></h5>
-        <h5><a asp-controller="Home" asp-action="Delete" asp-route-id="@Model.Id">Delete</a></h5>
+        <h5><a asp-controller="Home" asp-action="Edit" asp-route-id="@Model.id">Edit</a></h5>
+        <h5><a asp-controller="Home" asp-action="Delete" asp-route-id="@Model.id">Delete</a></h5>
     </div>

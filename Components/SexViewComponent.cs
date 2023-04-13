@@ -18,14 +18,14 @@ namespace Intex2A.Components
 
         public IViewComponentResult Invoke()
         {
-            ViewBag.SelectedSex = RouteData?.Values["sex"];
+/*            ViewBag.SelectedSex = RouteData?.Values["sex"];
 
-            var sexes = repo.Burials
-                .Select(x => x.Sex)
+            var sexes = repo.Burial
+                .Select(x => x.sex)
                 .Distinct()
                 .OrderBy(x => x);
-
-            return View(sexes);
+*/
+            return View();
         }
     }
 }

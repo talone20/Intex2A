@@ -1,23 +1,18 @@
 ﻿@{
     ViewData["Title"] = "Summary Page";
 }
-@model BurialsViewModel
+@model List<burialmain>
 
 <h2>Summary of the dead humans of Egyptian ethnicity, whose holy graves we dug from the earth to examine their long-rotted corpses</h2>
     <div class="row m-1 p-1">
         <div id="types" class="col-3">
             <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Home Page</a>
-            <br /><br />
-            Wrapping Type: <br />
-            <vc:wrapping></vc:wrapping> <br />
-            Sex: <br />
-            <vc:sex></vc:sex>
         </div>
 
 
         <div class="col-9">
             <div>
-                @foreach (PublicBurialmain Bm in Model.Burials)
+                @foreach (burialmain Bm in Model)
                 {
                     @*<partial name="BurialSummary" model="Bm" />*@
                     <div class="card card-outline-primary m-1 p-1">
@@ -42,8 +37,9 @@
         </div>
     </div>
 
-    <div page-blah="@Model.PageInfo" page-action="Summary" page-class="btn"
+@*    <div page-blah="@Model.PageInfo" page-action="Summary" page-class="btn"
          page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
          page-classes-enabled="true" class="">
 
     </div>
+*@

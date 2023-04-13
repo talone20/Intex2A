@@ -21,20 +21,20 @@ namespace Intex2A
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; set; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; set; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<dataContext>(options =>
+            services.AddDbContext<IntexDbContext>(options =>
             {
-                options.UseSqlite(Configuration["ConnectionStrings:IntexDBConnection"]);
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
             });
+            services.AddScoped<IintexRepository, EFintexRepository>();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -88,9 +88,9 @@ namespace Intex2A
             //        options.IncludeSubDomains = true;
             //        options.MaxAge = TimeSpan.FromDays(60);
             //    });
-            services.AddSingleton<InferenceSession>(
-                new InferenceSession("Model/my_model.onnx")
-              );
+            //services.AddSingleton<InferenceSession>(
+            //    new InferenceSession("Model/my_model.onnx")
+            //  );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -116,9 +116,8 @@ namespace Intex2A
 
             app.UseAuthentication();
             app.UseAuthorization();
-            app.Use(async (context, next) =>
-            {
-                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self' https://stackpath.bootstrapcdn.com 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://stackpath.bootstrapcdn.com https://fonts.gstatic.com; img-src 'self' https://via.placeholder.com; frame-src 'self'; connect-src 'self' wss://localhost:44391;");
+            app.Use(async (context, next) => {
+                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' ; style-src 'self' 'unsafe-inline' https://stackpath.bootstrapcdn.com  https://fonts.googleapis.com; font-src 'self' https://stackpath.bootstrapcdn.com https://fonts.gstatic.com; img-src 'self' https://via.placeholder.com; frame-src 'self'; connect-src 'self' wss://localhost:44391;");
                 await next();
             });
 
@@ -173,22 +172,33 @@ namespace Intex2A
 
             //using (var scope = app.ApplicationServices.CreateScope())
             //{
-            //    var userManager =
-            //        scope.ServiceProvider.GetRequiredService<UserManager< IdentityUser >> ();
-
-            //    string email = "admin@admin.com";
-            //    string password = "Test1234";
-
-            //    if(await userManager.FindByEmailAsync(email) == null)
+            //    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            //    var roles = new[] { "Admin", "Manager", "Memeber" };
+            //    foreach (var role in roles)
             //    {
-            //        var user = new IdentityUser();
-            //        user.UserName = email;
-            //        user.Email = email;
-
-            //        await userManager.CreateAsync(user, password);
-            //        await userManager.AddToRoleAsync(user, "Administrator");
+            //        if (!await roleManager.RoleExistsAsync(role))
+            //            await roleManager.CreateAsync(new IdentityRole(role));
             //    }
-        
+            //}
+
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var userManager =
+                    scope.ServiceProvider.GetRequiredService<UserManager< IdentityUser >> ();
+
+                string email = "admin@admin.com";
+                string password = "Test1234";
+                
+                if(await userManager.FindByEmailAsync(email) == null)
+                {
+                    var user = new IdentityUser();
+                    user.UserName = email;
+                    user.Email = email;
+
+                    await userManager.CreateAsync(user, password);
+                    await userManager.AddToRoleAsync(user, "Admin");
+                }
+
             }
         }
     }
