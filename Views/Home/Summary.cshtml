@@ -19,23 +19,8 @@
             <div>
                 @foreach (PublicBurialmain Bm in Model.Burials)
                 {
-                    @*<partial name="BurialSummary" model="Bm" />*@
-                    <div class="card card-outline-primary m-1 p-1">
-                        <div class="bg-light p-1">
-                            <h5>Burial ID: @Bm.Id</h5>
-                        </div>
-                        <ul>
-                            <li>Preservation: @Bm.Preservation</li>
-                            <li>Text: @Bm.Text</li>
-                            <li>Hair Color: @Bm.Haircolor</li>
-                            <li>Wrapping: @Bm.Wrapping</li>
-                            <li>Sex: @Bm.Sex</li>
-                            <li>Age at Death: @Bm.Ageatdeath </li>
-                            <li>Facebundles: @Bm.Facebundles</li>
-                        </ul>
-                        <h5><a asp-controller="Home" asp-action="Edit" asp-route-id="@Bm.Id">Edit</a></h5>
-                        <h5><a asp-controller="Home" asp-action="Delete" asp-route-id="@Bm.Id">Delete</a></h5>
-                    </div>
+                    <partial name="BurialSummary" model="Bm" />
+                    
                 }
 
             </div>

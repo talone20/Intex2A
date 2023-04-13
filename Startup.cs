@@ -125,6 +125,16 @@ namespace Intex2A
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
+
+                endpoints.MapControllerRoute(
+                    name: "editburials",
+                    pattern: "Home/Edit/{id}",
+                defaults: new { controller = "Home", action = "Edit" });
+
+                endpoints.MapControllerRoute(
                     name: "wrappingpage",
                     pattern: "{wrapping}/Page{pageNum}",
                     defaults: new { Controller = "Home", action = "Summary" });
@@ -154,13 +164,9 @@ namespace Intex2A
                     pattern: "{sex}",
                     defaults: new { Controller = "Home", action = "Summary", pageNum = 1 });
 
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
             });
 
-            using (var scope = app.ApplicationServices.CreateScope())
+/*            using (var scope = app.ApplicationServices.CreateScope())
             {
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
                 var roles = new[] { "Administrator", "Managers", "Member" };
@@ -169,7 +175,7 @@ namespace Intex2A
                     if (!await roleManager.RoleExistsAsync(role))
                         await roleManager.CreateAsync(new IdentityRole(role));
                 }
-            }
+            }*/
 
             //using (var scope = app.ApplicationServices.CreateScope())
             //{
