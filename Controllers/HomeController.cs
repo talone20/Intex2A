@@ -42,9 +42,32 @@ namespace Intex2A.Controllers
             return View();
         }
 
-        public IActionResult Edit()
+        //Get stuff
+        [HttpGet]
+        public IActionResult Edit(double id)
         {
-            return View();
+           
+            var burial = repo.Burials.FirstOrDefault(x => x.Id == id);
+            if (burial == null)
+            {
+               return View("Summary");
+            }
+            
+            return View(burial);
+        }
+
+
+        //Post stuff
+        [HttpPost]
+        public IActionResult Edit(double id, [Bind("Id,Squarenorthsouth,Headdirection,Sex,Northsouth,Depth,Eastwest,Adultsubadult,Facebundles,Southtohead,Preservation,Fieldbookpage,Squareeastwest,Goods,Text,Wrapping,Haircolor,Westtohead,Samplescollected,Area,Burialid,Length,Burialnumber,Dataexpertinitials,Westtofeet,Ageatdeath,Southtofeet,Excavationrecorder,Photos,Hair,Burialmaterials,Dateofexcavation,Fieldbookexcavationyear,Clusternumber,Shaftnumber")] PublicBurialmain burial)
+        {
+            if (ModelState.IsValid)
+            {
+                repo.SaveBurial(burial);
+ 
+                return RedirectToAction(nameof(Summary));
+            }
+            return View(burial);
         }
 
         public IActionResult Delete ()
