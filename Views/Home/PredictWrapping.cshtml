@@ -1,10 +1,12 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@{
+    ViewData["Title"] = "Edit Burial Entry";
+    Layout = "~/Views/Shared/_NavBar.cshtml";
+}
+
 @model Intex2A.Models.PredictionModels.ModelData
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script>
-   
+
     $(function () {
         $('form').submit(function (event) {
             event.preventDefault(); // Prevent default form submission
@@ -31,52 +33,52 @@
 </script>
 
 <div>
-    <div>
-        <h1 class="text-center" style="margin:auto">Predict the Wrapping of the mummy in any given Burial</h1> <br /> <br />
+    <div class="text-center" style="font-family: 'Cambria, Cochin, Georgia, Times, Times New Roman, serif'">
+        <h1>Predict Wrapping of Mummy</h1> <br /> <br />
     </div>
     <form asp-controller="Inference" asp-action="Score" method="post" id="WrappingForm" name="WrappingForm">
         <div class="row">
             <div class="col-6 text-center">
                 <label class="font-weight-bold" asp-for="AgeAtDeath_A">Age at Death:</label> <br />
-                <label><input type="radio" asp-for="AgeAtDeath_A" name="age" value="1" required/>Adult</label>
-                <label><input type="radio" asp-for="AgeAtDeath_C" name="age" value="1" required/>Child</label>
-                <label><input type="radio" asp-for="AgeAtDeath_I" name="age" value="1" required/>Infant</label>
-                <label><input type="radio" asp-for="AgeAtDeath_N" name="age" value="1" required/>Newborn</label>
+                <label><input type="radio" asp-for="AgeAtDeath_A" name="age" value="1" required />Adult</label>
+                <label><input type="radio" asp-for="AgeAtDeath_C" name="age" value="1" required />Child</label>
+                <label><input type="radio" asp-for="AgeAtDeath_I" name="age" value="1" required />Infant</label>
+                <label><input type="radio" asp-for="AgeAtDeath_N" name="age" value="1" required />Newborn</label>
                 <br />
                 <label class="font-weight-bold" asp-for="NorthSouth_N">North-South</label> <br />
-                <label><input type="radio" asp-for="NorthSouth_N" name="north" value="1" required/>North</label>
-                <label><input type="radio" asp-for="NorthSouth_N" name="north" value="0" required/>South</label>
+                <label><input type="radio" asp-for="NorthSouth_N" name="north" value="1" required />North</label>
+                <label><input type="radio" asp-for="NorthSouth_N" name="north" value="0" required />South</label>
                 <input type="hidden" asp-for="NorthSouth_N" name="north" value="0" class="form-control">
                 <br />
                 <label class="font-weight-bold" asp-for="EastWest_E">East-West:</label> <br />
-                <label><input type="radio" asp-for="EastWest_E" name="east_E" value="1" required/>East</label>
-                <label><input type="radio" asp-for="EastWest_W" name="east_E" value="0" required/>West</label>
+                <label><input type="radio" asp-for="EastWest_E" name="east_E" value="1" required />East</label>
+                <label><input type="radio" asp-for="EastWest_W" name="east_E" value="0" required />West</label>
                 <input type="hidden" asp-for="EastWest_W" name="east_W" value="0" class="form-control">
                 <input type="hidden" asp-for="EastWest_E" name="east_E" value="0" class="form-control">
                 <br />
                 <label class="font-weight-bold" asp-for="Area_NE">Area NorthEast:</label> <br />
-                <label><input type="radio" asp-for="Area_NE" name="northeast" value="1" required/>Yes</label>
-                <label><input type="radio" asp-for="Area_NE" name="northeast" value="0" required/>No</label>
+                <label><input type="radio" asp-for="Area_NE" name="northeast" value="1" required />Yes</label>
+                <label><input type="radio" asp-for="Area_NE" name="northeast" value="0" required />No</label>
                 <input type="hidden" asp-for="Area_NE" name="northeast" value="0" class="form-control">
                 <br />
                 <label class="font-weight-bold" asp-for="Area_SE">Area SouthEast:</label> <br />
-                <label><input type="radio" asp-for="Area_SE" name="southeast" value="1" required/>Yes</label>
-                <label><input type="radio" asp-for="Area_SE" name="southeast" value="0" required/>No</label>
+                <label><input type="radio" asp-for="Area_SE" name="southeast" value="1" required />Yes</label>
+                <label><input type="radio" asp-for="Area_SE" name="southeast" value="0" required />No</label>
                 <input type="hidden" asp-for="Area_SE" name="southeast" value="0" class="form-control">
                 <br />
                 <label class="font-weight-bold" asp-for="Area_SW">Area SouthWest:</label> <br />
-                <label><input type="radio" asp-for="Area_SW" name="southwest" value="1" required/>Yes</label>
-                <label><input type="radio" asp-for="Area_SW" name="southwest" value="0" required/>No</label>
+                <label><input type="radio" asp-for="Area_SW" name="southwest" value="1" required />Yes</label>
+                <label><input type="radio" asp-for="Area_SW" name="southwest" value="0" required />No</label>
                 <input type="hidden" asp-for="Area_SW" name="southwest" value="0" class="form-control">
                 <br />
                 <label class="font-weight-bold" asp-for="FaceBundles">Face Bundles:</label> <br />
-                <label><input type="radio" asp-for="FaceBundles" name="face-bundles" value="1" required/>Yes</label>
-                <label><input type="radio" asp-for="FaceBundles" name="face-bundles" value="0" required/>No</label>
+                <label><input type="radio" asp-for="FaceBundles" name="face-bundles" value="1" required />Yes</label>
+                <label><input type="radio" asp-for="FaceBundles" name="face-bundles" value="0" required />No</label>
                 <input type="hidden" asp-for="FaceBundles" name="face-bundles" value="0" class="form-control">
                 <br />
                 <label class="font-weight-bold" asp-for="Goods">Goods:</label> <br />
-                <label><input type="radio" asp-for="Goods" name="goods" value="1" required/>Yes</label>
-                <label><input type="radio" asp-for="Goods" name="goods" value="0" required/>No</label>
+                <label><input type="radio" asp-for="Goods" name="goods" value="1" required />Yes</label>
+                <label><input type="radio" asp-for="Goods" name="goods" value="0" required />No</label>
                 <input type="hidden" asp-for="Goods" name="goods" value="0" class="form-control">
                 <br />
             </div>
@@ -102,9 +104,9 @@
             </div>
         </div>
         <div class="text-center">
-            <button type="submit">Submit</button>
+            <button class="btn btn-primary" type="submit">Submit</button>
         </div>
-        <br/>
-        <br/>
+        <br />
+        <br />
     </form>
 </div>

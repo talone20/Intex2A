@@ -5,9 +5,14 @@
 
 @model BurialsViewModel
 
+<style>
+    .sidenav {
+        background-color: #785C39;
+    }
+</style>
 
 <div class="row m-1 p-1">
-    <div id="types" class="col-3">
+    <div class="col-3 sidenav">
         <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Home Page</a>
     </div>
 
@@ -18,6 +23,11 @@
             <partial name="BurialSummary" model="Bm" />
         }
     </div>
+    
+    <div class="col-3 sidenav">
+        <a asp-controller="Home" asp-action="CreateBurial" class="btn btn-outline-secondary">Create New Record</a>
+    </div>
+</div>
 </div>
 
 <div class="form-group">
@@ -34,51 +44,3 @@
 
 </div>
 
-
-
-@*@if (Model.PageCount > 1)
-{
-    <div class="pagination">
-        <ul>
-            @{
-                int startPage = Model.PageNumber - 2;
-                if (startPage < 1)
-                {
-                    startPage = 1;
-                }
-
-                int endPage = startPage + 4;
-                if (endPage > Model.PageCount)
-                {
-                    endPage = Model.PageCount;
-                    startPage = endPage - 4;
-                    if (startPage < 1)
-                    {
-                        startPage = 1;
-                    }
-                }
-            }
-
-            @if (Model.HasPreviousPage)
-            {
-                <li><a href="@Url.Action("Summary", new { page = Model.PageNumber - 1 })">Previous</a></li>
-            }
-
-            @for (int i = startPage; i <= endPage; i++)
-            {
-                if (i == Model.PageNumber)
-                {
-                    <li class="active"><span>@i <span class="sr-only">(current)</span></span></li>
-                }
-                else
-                {
-                    <li><a href="@Url.Action("Summary", new { page = i })">@i</a></li>
-                }
-            }
-
-            @if (Model.HasNextPage)
-            {
-                <li><a href="@Url.Action("Summary", new { page = Model.PageNumber + 1 })">Next</a></li>
-            }
-        </ul>
-    </div>*@

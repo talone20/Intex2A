@@ -10,6 +10,8 @@ using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore;
 
 namespace Intex2A.Controllers
 {
@@ -52,15 +54,75 @@ namespace Intex2A.Controllers
         {
             return View();
         }
-
-        public IActionResult Edit()
+        [HttpGet]
+        public IActionResult CreateBurial()
         {
             return View();
         }
-
-        public IActionResult Delete ()
+        [HttpPost]
+        public IActionResult CreateBurial(burialmain burial)
         {
-            return View ();
+            if (burial == null)
+            {
+                return NotFound();
+            }
+
+            repo.CreateBurial(burial);
+
+            return View("Summary");
+        }
+        [HttpGet]
+        [Authorize]
+        public IActionResult Edit(double burialId)
+        {
+            var burial = repo.Burials.FirstOrDefault(x => x.id == burialId);
+
+            if (burial == null)
+            {
+                return NotFound();
+            }
+
+            return View(burial);
+        }
+        [HttpPost]
+        [Authorize]
+        public IActionResult Edit(burialmain burial)
+        {
+
+            if (burial == null)
+            {
+                return NotFound();
+            }
+
+            repo.UpdateBurial(burial);
+
+            ViewData["Message"] = "Record updated successfully.";
+
+            return View(burial);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult Delete(double burialId)
+        {
+            var burial = repo.Burials.FirstOrDefault(x => x.id == burialId);
+
+            if (burial == null)
+            {
+                return NotFound();
+            }
+
+            return View(burial);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult ConfirmDelete(double burialId)
+        {
+
+            repo.DeleteBurial(burialId);
+
+            return RedirectToAction("Summary");
         }
 
         [Authorize]
@@ -68,6 +130,8 @@ namespace Intex2A.Controllers
         {
             return View();
         }
+
+      
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 
