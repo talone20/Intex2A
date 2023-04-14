@@ -25,6 +25,11 @@
   <ItemGroup>
     <Folder Include="Pages\" />
     <Folder Include="Views\Shared\Components\" />
+    <Folder Include="wwwroot\Model\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\my_model.onnx" />
   </ItemGroup>
 
 </Project>

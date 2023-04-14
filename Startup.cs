@@ -95,7 +95,7 @@ namespace Intex2A
             //    });
             services.AddSingleton<InferenceSession>(provider => {
                 var env = provider.GetService<IWebHostEnvironment>();
-                var modelPath = Path.Combine(env.ContentRootPath, "Model", "my_model.onnx");
+                var modelPath = Path.Combine(env.ContentRootPath, "wwwroot", "my_model.onnx");
                 return new InferenceSession(modelPath);
             });
         }
