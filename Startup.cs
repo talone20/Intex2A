@@ -53,6 +53,7 @@ namespace Intex2A
                 // requires using Microsoft.AspNetCore.Http;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
                 options.ConsentCookie.SecurePolicy = CookieSecurePolicy.Always;
+
             });
             services.Configure<IdentityOptions>(options =>
             {
