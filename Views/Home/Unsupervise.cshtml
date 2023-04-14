@@ -1,0 +1,45 @@
+﻿@page
+@model Intex2A.Views.Home.UnsuperviseModel
+
+@using Microsoft.AspNetCore.Hosting
+@inject IWebHostEnvironment HostingEnvironment
+@{
+    string htmlFilePath = "wwwroot/unsupervised.html";  //Edit this file path to the file path to your html file
+    string htmlContent = System.IO.File.ReadAllText(htmlFilePath);
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Page</title>
+</head>
+<body>
+    <div class="hero">
+        <div class="bar">
+            <img src="~/lib/image/logo.png" class="logo">
+        </div>
+        <div class="overlay"></div>
+        <div class="row">
+            <div class="col">
+    
+                <p>
+                    <img src="~/lib/image/area.jpg" />
+                    <img src="~/lib/image/material.jpg" />
+                    <p></p>
+                    <img src="~/lib/image/thick.jpg" />
+                    <img src="~/lib/image/materialscatterplot.jpg" />
+                    <p>This is a scatterplot of the correlation between material and depth. As you can see, linen was used consistently in for every depth. However, there was a period of time between depth 0.7 to 1.2 where wool was not used </p>
+                    <img src="~/lib/image/ageandlength (5).jpg" />
+                    <img src="~/lib/image/arealength (6).jpg" />
+                </p>
+                <button>Learn More</button>
+            </div>
+        </div>
+    </div>
+    <div>
+        @Html.Raw(htmlContent)
+    </div>
+</body>
+</html>

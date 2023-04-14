@@ -157,6 +157,11 @@ namespace Intex2A.Controllers
             return RedirectToAction("Summary");
         }
 
+        public IActionResult Unsupervise()
+        {
+            return View();
+        }
+
         [Authorize]
         public IActionResult Privacy()
         {
