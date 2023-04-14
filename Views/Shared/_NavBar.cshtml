@@ -6,24 +6,43 @@
 <style>
     nav {
         flex: 1;
-        text-align: right;
+        text-align: left;
         background-color: #825c31;
         height: 12vh;
+        width: 100%;
+        border-radius: 10px;
     }
 
-    nav ul li {
+    .sidenav {
+        background-color: dimgray;
+        border-radius: 10px;
+    }
+    .nav-link {
+        font-size: 18px;
+    }
+    .navbar-nav {
+        display: flex;
+        justify-content: space-around;
+
+    }
+    .navbar-brand ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         list-style: none;
-        display: inline-block;
-        margin-left: 60px;
+        margin: 0;
+        padding: 0;
     }
 
-    nav ul li a {
-        text-decoration: none;
-        color: #fff;
-        font-size: 13px;
+    .navbar-brand li {
+        margin: 0 10px;
     }
 
+    .navbar-brand a {
+        font-size: 18px;
+    }
 </style>
+
 
 <html>
 <head>
@@ -35,21 +54,21 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
     <body>
-        <nav class="nav header">
-            <ul class="list-group-item-primary">
-                <li>
-                    <a href="">Home</a>
+        <nav class="navbar-brand m-lg-2">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
                 </li>
-                <li>
-                    <a asp-controller="Home" asp-action="Summary">Burial Information</a>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Summary">Burial Information</a>
                 </li>
-                <li>
-                    <a asp-controller="Home" asp-action="PredictWrapping">Supervised</a>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="PredictWrapping">Supervised</a>
                 </li>
-                <li>
-                    <a href="">Unsupervised</a>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Unsupervised">Unsupervised</a>
                 </li>
-                <li>
+                <li class="nav-item">
                     <partial name="_LoginPartial" />
                 </li>
             </ul>
