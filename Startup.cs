@@ -75,32 +75,6 @@ namespace Intex2A
                 options.MaxAge = TimeSpan.FromDays(60);
             });
 
-            //    services.AddAuthentication(
-            //        options =>
-            //        {
-            //            options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            //            options.DefaultChallengeScheme = "OAuthProvider";
-            //        })
-            //        .AddCookie()
-            //.AddGoogle(options =>
-            //{
-            //    IConfigurationSection googleAuthNSection =
-            //        Configuration.GetSection("Authentication:Google");
-
-            //    options.ClientId = googleAuthNSection["ClientId"];
-            //    options.ClientSecret = googleAuthNSection["ClientSecret"];
-            //})
-            //.AddOAuth("OAuthProvider", options =>
-            //{
-            //    options.ClientId = "254761430313-purnb7pnn4rals57530jsrbsbtggumct.apps.googleusercontent.com";
-            //    // other options here
-            //});
-            //    services.AddHsts(options =>
-            //    {
-            //        options.Preload = true;
-            //        options.IncludeSubDomains = true;
-            //        options.MaxAge = TimeSpan.FromDays(60);
-            //    });
             services.AddSingleton<InferenceSession>(provider => {
                 var env = provider.GetService<IWebHostEnvironment>();
                 var modelPath = Path.Combine(env.ContentRootPath, "wwwroot", "my_model.onnx");

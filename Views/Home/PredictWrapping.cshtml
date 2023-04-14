@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Edit Burial Entry";
+    ViewData["Title"] = "Predict";
     Layout = "~/Views/Shared/_NavBar.cshtml";
 }
 
@@ -32,9 +32,10 @@
     });
 </script>
 
+<title>Predict</title>
 <div>
     <div class="text-center" style="font-family: 'Cambria, Cochin, Georgia, Times, Times New Roman, serif'">
-        <br/>
+        <br />
         <h1>Predict Wrapping of Mummy</h1> <br /> <br />
     </div>
     <form asp-controller="Inference" asp-action="Score" method="post" id="WrappingForm" name="WrappingForm">
