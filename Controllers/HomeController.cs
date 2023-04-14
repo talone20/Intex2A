@@ -27,9 +27,39 @@ namespace Intex2A.Controllers
 /*            _logger = logger;*/
         }
 
-        public IActionResult Summary(int pageNum = 1)
+        public IActionResult Summary(int pageNum = 1, string? sex, string? depth, string? ageatdeath, string headdirection,
+            string? wrapping, string? goods)
         {
             int pageSize = 10;
+
+            var query = repo.Burials.AsQueryable();
+
+            if (!string.IsNullOrEmpty(sex))
+            {
+                query = query.Where(b => b.sex.Contains(sex));
+            }
+            if (!string.IsNullOrEmpty(depth))
+            {
+                query = query.Where(b => b.depth.Contains(depth));
+            }
+            if (!string.IsNullOrEmpty(ageatdeath))
+            {
+                query = query.Where(b => b.ageatdeath.Contains(ageatdeath));
+            }
+            if (!string.IsNullOrEmpty(headdirection))
+            {
+                query = query.Where(b => b.headdirection.Contains(headdirection));
+            }
+            if (!string.IsNullOrEmpty(wrapping))
+            {
+                query = query.Where(b => b.wrapping.Contains(wrapping));
+            }
+            if (!string.IsNullOrEmpty(goods))
+            {
+                query = query.Where(b => b.goods.Contains(goods));
+            }
+
+            // Execute the query and store the results in a list of objects
 
             var x = new BurialsViewModel
             {
