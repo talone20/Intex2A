@@ -2,7 +2,9 @@
     ViewData["Title"] = "Summary Page";
     Layout = "~/Views/Shared/_NavBar.cshtml";
 }
-@model List<burialmain>
+
+@model BurialsViewModel
+
 <style>
     .sidenav {
         background-color: #785C39;
@@ -16,12 +18,29 @@
 
 
     <div class="col-6">
-        @foreach (burialmain Bm in Model)
+        @foreach (burialmain Bm in Model.Burials)
         {
             <partial name="BurialSummary" model="Bm" />
         }
     </div>
+    
     <div class="col-3 sidenav">
         <a asp-controller="Home" asp-action="CreateBurial" class="btn btn-outline-secondary">Create New Record</a>
     </div>
 </div>
+</div>
+
+<div class="form-group">
+    <label for="page-input">Jump to page:</label>
+    <input type="number" id="page-input" name="page" min="1" max="@Model.PageInfo.TotalPages">
+    <button type="submit" class="btn btn-primary" 
+        href="@Url.Action("Summary", new { pageNum = 6 })">Go</button>
+</div>
+
+
+<div page-blah="@Model.PageInfo" page-action="Summary" page-class="btn"
+        page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
+        page-classes-enabled="true" page-class-nuts="right: 300" class="pagination">
+
+</div>
+

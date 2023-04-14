@@ -27,18 +27,27 @@ namespace Intex2A.Controllers
 /*            _logger = logger;*/
         }
 
-        public IActionResult Summary(/*int pageNum = 1*/)
+        public IActionResult Summary(int pageNum = 1)
         {
-            /*int pageSize = 10;*/
+            int pageSize = 10;
 
+            var x = new BurialsViewModel
+            {
+                Burials = repo.Burials
+                .OrderBy(x => x.id)
+                .Skip((pageNum - 1) * pageSize)
+                .Take(pageSize),
 
-            // Execute the query and store the results in a list of objects
-            var burials = repo.Burials.
-                OrderBy(x => x.id).
-                ToList<burialmain>();
+                PageInfo = new PageInfo
+                {
+                    TotalNumBurials = repo.Burials.Count(),
+                    BurialsPerPage = pageSize,
+                    CurrentPage = pageNum
+                }
 
+            };
             // Pass the list of objects to the view for display
-            return View(burials);
+            return View(x);
         }
         
         public IActionResult Index()
