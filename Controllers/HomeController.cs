@@ -27,10 +27,10 @@ namespace Intex2A.Controllers
 /*            _logger = logger;*/
         }
 
-        public IActionResult Summary(/*int pageNum = 1*/ string? sex, string? depth, string? ageatdeath, string headdirection,
+        public IActionResult Summary(int pageNum = 1, string? sex, string? depth, string? ageatdeath, string headdirection,
             string? wrapping, string? goods)
         {
-            /*int pageSize = 10;*/
+            int pageSize = 10;
 
             var query = repo.Burials.AsQueryable();
 
@@ -60,12 +60,24 @@ namespace Intex2A.Controllers
             }
 
             // Execute the query and store the results in a list of objects
-            var burials = query.
-                OrderBy(x => x.id).
-                ToList<burialmain>();
 
+            var x = new BurialsViewModel
+            {
+                Burials = repo.Burials
+                .OrderBy(x => x.id)
+                .Skip((pageNum - 1) * pageSize)
+                .Take(pageSize),
+
+                PageInfo = new PageInfo
+                {
+                    TotalNumBurials = repo.Burials.Count(),
+                    BurialsPerPage = pageSize,
+                    CurrentPage = pageNum
+                }
+
+            };
             // Pass the list of objects to the view for display
-            return View(burials);
+            return View(x);
         }
         
         public IActionResult Index()
@@ -90,6 +102,7 @@ namespace Intex2A.Controllers
             return View("Summary");
         }
         [HttpGet]
+        [Authorize]
         public IActionResult Edit(double burialId)
         {
             var burial = repo.Burials.FirstOrDefault(x => x.id == burialId);
@@ -102,6 +115,7 @@ namespace Intex2A.Controllers
             return View(burial);
         }
         [HttpPost]
+        [Authorize]
         public IActionResult Edit(burialmain burial)
         {
 
@@ -118,6 +132,7 @@ namespace Intex2A.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Delete(double burialId)
         {
             var burial = repo.Burials.FirstOrDefault(x => x.id == burialId);
@@ -131,6 +146,7 @@ namespace Intex2A.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult ConfirmDelete(double burialId)
         {
 
@@ -144,6 +160,8 @@ namespace Intex2A.Controllers
         {
             return View();
         }
+
+      
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 
