@@ -10,7 +10,20 @@
     string htmlFilePath = "wwwroot/unsupervised.html";  //Edit this file path to the file path to your html file
     string htmlContent = System.IO.File.ReadAllText(htmlFilePath);
 }
+<style>
+    .col-6 img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+        
+    }
 
+    .col-6 {
+        margin: 0 auto;
+        text-align: center;
+    }
+</style>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,36 +32,34 @@
     <title>My Page</title>
 </head>
 <body>
+
     <div class="hero">
         <div class="bar">
             <img src="~/lib/image/logo.png" class="logo">
         </div>
         <div class="overlay"></div>
-          <h1>Data for the Hypothesis</h1>
+        <h1>Data for the Hypothesis</h1>
         <div class="row">
-          
-            <div class="col-6" class = "text-center">
-                
-                <h3>Area to Depth Correlation </h3>
-                    <img src="~/lib/image/area.jpg" />
+            <div class="col-6 mx-auto text-center">
+                <h3>Area to Depth Correlation</h3>
+                <img src="~/lib/image/area.jpg" />
                 <p>This is a scatterplot of the area to depth correlation, as you can see there are no changes through out time in the location these mummies were buried. Most of these mummies were buried in the NE plot</p>
                 <h3>Correlation Thickness to Depth 1</h3>
-                    <img src="~/lib/image/thick.jpg" />
+                <img src="~/lib/image/thick.jpg" />
                 <p></p>
                 <h3>Correlation Material to Depth 1</h3>
-                    <img src="~/lib/image/materialscatterplot.jpg" />
-                    <p>This is a scatterplot of the correlation between material and depth. As you can see, linen was used consistently in for every depth. However, there was a period of time between depth 0.7 to 1.2 where wool was not used </p>
-                <h3>Clustering for Age at Death, Length and Depth </h3>
-                    
-                    <img src="~/lib/image/ageandlength (5).jpg" />
-                <p>This is a clustering plot for age at death, length and depth. As you can see, there is a consistency between age, length and death. </p>
+                <img src="~/lib/image/materialscatterplot.jpg" />
+                <p>This is a scatterplot of the correlation between material and depth. As you can see, linen was used consistently in for every depth. However, there was a period of time between depth 0.7 to 1.2 where wool was not used</p>
+                <h3>Clustering for Age at Death, Length and Depth</h3>
+                <img src="~/lib/image/ageandlength (5).jpg" />
+                <p>This is a clustering plot for age at death, length and depth. As you can see, there is a consistency between age, length and death.</p>
                 <h3>Clustering for Area, Length and Depth</h3>
                 <img src="~/lib/image/arealength (6).jpg" />
-                <p>This is a clustering plot for age at Area, length and depth. As you can see, there is a consistency between age, length and death. </p>
-                    
+                <p>This is a clustering plot for age at Area, length and depth. As you can see, there is a consistency between age, length and death.</p>
             </div>
-            <div class="col-2"></div>
         </div>
+    </div>
+
     </div>
     <div>
         @Html.Raw(htmlContent)
