@@ -12,6 +12,21 @@
 <div class="row m-1 p-1">
     <div class="col-3 sidenav">
         <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Home Page</a>
+        <form method="get" action="@Url.Action("Summary", "Home" )">
+            <label>Sex:</label>
+            <input type="text" name="sex" id="sex" /> <br/>
+            <label>Depth:</label>
+            <input type="text" name="depth" id="depth" /> <br />
+            <label>Age at Death:</label>
+            <input type="text" name="ageatdepth" id="ageaatdepth" /> <br />
+            <label>Head Direction:</label>
+            <input type="text" name="sex" id="sex" /> <br />
+            <label>Wrapping:</label>
+            <input type="text" name="wrapping" id="wrapping" /> <br />
+            <label>Goods:</label>
+            <input type="text" name="goods" id="goods" /> <br />
+            <button type="submit">Filter</button>
+        </form>
     </div>
 
 
