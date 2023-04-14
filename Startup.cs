@@ -23,11 +23,11 @@ namespace Intex2A
     public class Startup
     {
         public IConfiguration Configuration { get; set; }
-        private readonly IWebHostEnvironment _env;
-        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
+      
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            _env = environment;
+       
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -93,11 +93,11 @@ namespace Intex2A
             //        options.IncludeSubDomains = true;
             //        options.MaxAge = TimeSpan.FromDays(60);
             //    });
-            services.AddSingleton<InferenceSession>(
-                new InferenceSession(
-                    Path.Combine(_env.ContentRootPath, "Model", "my_model.onnx")
-                    )
-            );
+            services.AddSingleton<InferenceSession>(provider => {
+                var env = provider.GetService<IWebHostEnvironment>();
+                var modelPath = Path.Combine(env.ContentRootPath, "Model", "my_model.onnx");
+                return new InferenceSession(modelPath);
+            });
         }
 
             // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
