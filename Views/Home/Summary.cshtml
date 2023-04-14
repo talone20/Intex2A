@@ -3,25 +3,25 @@
     Layout = "~/Views/Shared/_NavBar.cshtml";
 }
 @model List<burialmain>
+<style>
+    .sidenav {
+        background-color: #785C39;
+    }
+</style>
 
-
-    <div class="row m-1 p-1">
-        <div id="types" class="col-3">
-            <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Home Page</a>
-        </div>
-
-
-        <div class="col-6">
-                @foreach (burialmain Bm in Model)
-                {
-                    <partial name="BurialSummary" model="Bm" />
-                }
-        </div>
+<div class="row m-1 p-1">
+    <div class="col-3 sidenav">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Home Page</a>
     </div>
 
-@*    <div page-blah="@Model.PageInfo" page-action="Summary" page-class="btn"
-         page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
-         page-classes-enabled="true" class="">
 
+    <div class="col-6">
+        @foreach (burialmain Bm in Model)
+        {
+            <partial name="BurialSummary" model="Bm" />
+        }
     </div>
-*@
+    <div class="col-3 sidenav">
+        <a asp-controller="Home" asp-action="CreateBurial" class="btn btn-outline-secondary">Create New Record</a>
+    </div>
+</div>

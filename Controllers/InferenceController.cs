@@ -40,14 +40,5 @@ namespace Intex2A.Controllers
             return RedirectToAction("Inference/PredictedScore", prediction);
         }
 
-/*        private ActionResult PartialView(string v, Prediction prediction)
-        {
-            throw new NotImplementedException();
-        }
-*/
-        /*        private ActionResult View(string v, Prediction prediction)
-                {
-                    throw new NotImplementedException();
-                }*/
     }
 }
