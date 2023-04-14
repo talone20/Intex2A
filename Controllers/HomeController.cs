@@ -10,6 +10,8 @@ using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore;
 
 namespace Intex2A.Controllers
 {
@@ -31,7 +33,9 @@ namespace Intex2A.Controllers
 
 
             // Execute the query and store the results in a list of objects
-            var burials = repo.Burials.ToList<burialmain>();
+            var burials = repo.Burials.
+                OrderBy(x => x.id).
+                ToList<burialmain>();
 
             // Pass the list of objects to the view for display
             return View(burials);
@@ -41,15 +45,71 @@ namespace Intex2A.Controllers
         {
             return View();
         }
-
-        public IActionResult Edit()
+        [HttpGet]
+        public IActionResult CreateBurial()
         {
             return View();
         }
-
-        public IActionResult Delete ()
+        [HttpPost]
+        public IActionResult CreateBurial(burialmain burial)
         {
-            return View ();
+            if (burial == null)
+            {
+                return NotFound();
+            }
+
+            repo.CreateBurial(burial);
+
+            return View("Summary");
+        }
+        [HttpGet]
+        public IActionResult Edit(double burialId)
+        {
+            var burial = repo.Burials.FirstOrDefault(x => x.id == burialId);
+
+            if (burial == null)
+            {
+                return NotFound();
+            }
+
+            return View(burial);
+        }
+        [HttpPost]
+        public IActionResult Edit(burialmain burial)
+        {
+
+            if (burial == null)
+            {
+                return NotFound();
+            }
+
+            repo.UpdateBurial(burial);
+
+            ViewData["Message"] = "Record updated successfully.";
+
+            return View(burial);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(double burialId)
+        {
+            var burial = repo.Burials.FirstOrDefault(x => x.id == burialId);
+
+            if (burial == null)
+            {
+                return NotFound();
+            }
+
+            return View(burial);
+        }
+
+        [HttpGet]
+        public IActionResult ConfirmDelete(double burialId)
+        {
+
+            repo.DeleteBurial(burialId);
+
+            return RedirectToAction("Summary");
         }
 
         [Authorize]

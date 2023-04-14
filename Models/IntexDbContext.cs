@@ -20,7 +20,7 @@ namespace Intex2A.Models
         }
 
         public DbSet<burialmain> Burials { get; set; }
-        
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

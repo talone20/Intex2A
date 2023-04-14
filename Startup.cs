@@ -129,9 +129,24 @@ namespace Intex2A
                     defaults: new { Controller = "Home", action = "Summary" });
 
                 endpoints.MapControllerRoute(
-                    name: "sexpage",
-                    pattern: "{sex}/Page{pageNum}",
-                    defaults: new { Controller = "Home", action = "Summary" });
+                    name: "editburial",
+                    pattern: "Home/Edit/{burialId}",
+                    defaults: new { Controller = "Home", action = "Edit" });
+
+                endpoints.MapControllerRoute(
+                    name: "deleteburial",
+                    pattern: "Home/Delete/{burialId}",
+                    defaults: new { Controller = "Home", action = "Delete" });
+
+                endpoints.MapControllerRoute(
+                    name: "confirmdelete",
+                    pattern: "Home/ConfirmDelete/{burialId}",
+                    defaults: new { Controller = "Home", action = "ConfirmDelete" });
+
+                endpoints.MapControllerRoute(
+                    name: "createburial",
+                    pattern: "Home/CreateBurial",
+                    defaults: new { Controller = "Home", action = "CreateBurial" });
 
                 endpoints.MapControllerRoute(
                     name:"Paging",
@@ -142,21 +157,12 @@ namespace Intex2A
                 name: "score",
                 pattern: "Model/Score",
                 defaults: new { Controller = "Inference", action = "Score" });
-
-                endpoints.MapControllerRoute(
-                    name: "wrapping",
-                    pattern: "{wrapping}",
-                    defaults: new { Controller = "Home", action = "Summary", pageNum=1 });
-
-                endpoints.MapControllerRoute(
-                    name: "sex",
-                    pattern: "{sex}",
-                    defaults: new { Controller = "Home", action = "Summary", pageNum = 1 });
                 
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+
             });
 
             //using (var scope = app.ApplicationServices.CreateScope())
