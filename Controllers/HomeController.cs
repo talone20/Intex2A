@@ -66,6 +66,11 @@ namespace Intex2A.Controllers
             return View ();
         }
 
+        public IActionResult Unsupervise()
+        {
+            return View();
+        }
+
         [Authorize]
         public IActionResult Privacy()
         {

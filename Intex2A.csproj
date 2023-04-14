@@ -24,4 +24,8 @@
     <Folder Include="Pages\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\lib\image\ageandlength %285%29.jpg" />
+  </ItemGroup>
+
 </Project>
