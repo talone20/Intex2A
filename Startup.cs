@@ -97,8 +97,8 @@ namespace Intex2A
                     app.UseHsts();
                 }
 
-                app.UseHsts();
                 app.UseHttpsRedirection();
+                app.UseHsts();
                 app.UseStaticFiles();
                 app.UseCookiePolicy();
                 app.UseRouting();
