@@ -157,7 +157,7 @@ namespace Intex2A.Controllers
             return RedirectToAction("Summary");
         }
 
-        public IActionResult Unsupervise()
+        public IActionResult Unsupervised()
         {
             return View();
         }

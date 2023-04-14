@@ -1,4 +1,7 @@
-﻿@page
+﻿@{
+    ViewData["Title"] = "Unsupervised";
+    Layout = "~/Views/Shared/_NavBar.cshtml";
+}
 @model Intex2A.Views.Home.UnsuperviseModel
 
 @using Microsoft.AspNetCore.Hosting
@@ -21,21 +24,30 @@
             <img src="~/lib/image/logo.png" class="logo">
         </div>
         <div class="overlay"></div>
+          <h1>Data for the Hypothesis</h1>
         <div class="row">
-            <div class="col">
-    
-                <p>
+          
+            <div class="col-6" class = "text-center">
+                
+                <h3>Area to Depth Correlation </h3>
                     <img src="~/lib/image/area.jpg" />
-                    <img src="~/lib/image/material.jpg" />
-                    <p></p>
+                <p>This is a scatterplot of the area to depth correlation, as you can see there are no changes through out time in the location these mummies were buried. Most of these mummies were buried in the NE plot</p>
+                <h3>Correlation Thickness to Depth 1</h3>
                     <img src="~/lib/image/thick.jpg" />
+                <p></p>
+                <h3>Correlation Material to Depth 1</h3>
                     <img src="~/lib/image/materialscatterplot.jpg" />
                     <p>This is a scatterplot of the correlation between material and depth. As you can see, linen was used consistently in for every depth. However, there was a period of time between depth 0.7 to 1.2 where wool was not used </p>
+                <h3>Clustering for Age at Death, Length and Depth </h3>
+                    
                     <img src="~/lib/image/ageandlength (5).jpg" />
-                    <img src="~/lib/image/arealength (6).jpg" />
-                </p>
-                <button>Learn More</button>
+                <p>This is a clustering plot for age at death, length and depth. As you can see, there is a consistency between age, length and death. </p>
+                <h3>Clustering for Area, Length and Depth</h3>
+                <img src="~/lib/image/arealength (6).jpg" />
+                <p>This is a clustering plot for age at Area, length and depth. As you can see, there is a consistency between age, length and death. </p>
+                    
             </div>
+            <div class="col-2"></div>
         </div>
     </div>
     <div>
