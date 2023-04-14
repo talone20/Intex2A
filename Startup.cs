@@ -51,6 +51,7 @@ namespace Intex2A
                 options.CheckConsentNeeded = context => true;
                 // requires using Microsoft.AspNetCore.Http;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
+                
             });
             services.Configure<IdentityOptions>(options =>
             {
