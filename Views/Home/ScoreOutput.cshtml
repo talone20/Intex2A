@@ -4,11 +4,11 @@
 }
 @model Intex2A.Models.PredictionModels.Prediction
 
-<div class="text-center container-lg" style="height:90vh">
+<div class="text-center container-lg" style="height:70vh">
     <div class="row">
         <div class="col-3">
         </div>
-        <div class="col-6 text-center">
+        <div class="col-6 text-center" style="align-items:center">
             <h1>Based on the data given, we can predict: </h1>
 
             @if (Model.PredictedValue == "W")
@@ -28,7 +28,7 @@
                 <h2>The body will be PARTIALLY COVERED in wrapping</h2>
             }
 
-            <h3><a asp-controller="Home" asp-action="PredictWrapping">Make another prediction</a></h3>
+            <h2><a asp-controller="Home" asp-action="PredictWrapping">Make another prediction</a></h2>
         </div>
         <div class="col-3">
 

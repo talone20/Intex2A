@@ -67,6 +67,14 @@ namespace Intex2A
                 options.Password.RequiredLength = 13;
                 options.Password.RequiredUniqueChars = 1;
             });
+
+            services.AddHsts(options =>
+            {
+                options.Preload = true;
+                options.IncludeSubDomains = true;
+                options.MaxAge = TimeSpan.FromDays(60);
+            });
+
             //    services.AddAuthentication(
             //        options =>
             //        {

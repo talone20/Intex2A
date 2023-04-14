@@ -5,25 +5,44 @@
 
 @model BurialsViewModel
 
+<style>
+    label {
+        display: inline-block;
+        width: 120px; /* adjust as needed */
+        text-align: right;
+        margin-right: 20px; /* adjust as needed */
+    }
+
+    input {
+        display: inline-block;
+        width: calc(50%); /* adjust as needed */
+        box-sizing: border-box;
+    }
+</style>
 
 <div class="row m-1 p-1">
-    <div class="col-3 sidenav">
-        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Home Page</a>
-        <form method="get" action="@Url.Action("Summary", "Home" )">
+    <div class="col-4 sidenav" style="background-color:navajowhite">
+        <div class="text-center m-1 p-1">
+            <a asp-controller="Home" asp-action="CreateBurial" class="btn btn-primary">Create New Record</a>
+        </div>
+        <form method="get" class="col-form-label" action="@Url.Action("Summary", "Home" )">
             <label>Sex:</label>
-            <input type="text" name="sex" id="sex" /> <br />
+            <input type="search" name="sex" id="sex" /> <br />
             <label>Depth:</label>
-            <input type="text" name="depth" id="depth" /> <br />
+            <input type="search" name="depth" id="depth" /> <br />
             <label>Age at Death:</label>
-            <input type="text" name="ageatdepth" id="ageaatdepth" /> <br />
+            <input type="search" name="ageatdepth" id="ageaatdepth" /> <br />
             <label>Head Direction:</label>
-            <input type="text" name="sex" id="sex" /> <br />
+            <input type="search" name="sex" id="sex" /> <br />
             <label>Wrapping:</label>
-            <input type="text" name="wrapping" id="wrapping" /> <br />
+            <input type="search" name="wrapping" id="wrapping" /> <br />
             <label>Goods:</label>
-            <input type="text" name="goods" id="goods" /> <br />
+            <input type="search" name="goods" id="goods" /> <br />
             <input type="hidden" name="pageNum" value="@Model.PageInfo.CurrentPage">
-            <button type="submit">Filter</button>
+            <br />
+            <div class="text-center m-1 p-1">
+                <button class="btn btn-primary" type="submit">Filter</button>
+            </div>
         </form>
     </div>
 
@@ -35,9 +54,9 @@
         }
     </div>
     
-    <div class="col-3 sidenav">
-        <a asp-controller="Home" asp-action="CreateBurial" class="btn btn-outline-secondary">Create New Record</a>
-    </div>
+@*    <div class="col-3 sidenav" style="background-color:navajowhite">
+        
+    </div>*@
 </div>
 
 <div class="form-group d-flex justify-content-center align-items-center">
@@ -50,10 +69,8 @@
     </form>
 </div>
 
-
 <div page-blah="@Model.PageInfo" page-action="Summary" page-class="btn"
         page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
         page-classes-enabled="true" page-class-nuts="right: 300" class="pagination">
-
 </div>
 

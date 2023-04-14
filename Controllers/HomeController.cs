@@ -99,7 +99,9 @@ namespace Intex2A.Controllers
 
             repo.CreateBurial(burial);
 
-            return View("Summary");
+            int pageNum = 1;
+
+            return RedirectToAction("Summary");
         }
         [HttpGet]
         [Authorize]
