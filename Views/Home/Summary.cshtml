@@ -16,7 +16,7 @@
         <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Home Page</a>
         <form method="get" action="@Url.Action("Summary", "Home" )">
             <label>Sex:</label>
-            <input type="text" name="sex" id="sex" /> <br/>
+            <input type="text" name="sex" id="sex" /> <br />
             <label>Depth:</label>
             <input type="text" name="depth" id="depth" /> <br />
             <label>Age at Death:</label>
@@ -27,6 +27,7 @@
             <input type="text" name="wrapping" id="wrapping" /> <br />
             <label>Goods:</label>
             <input type="text" name="goods" id="goods" /> <br />
+            <input type="hidden" name="pageNum" value="@Model.PageInfo.CurrentPage">
             <button type="submit">Filter</button>
         </form>
     </div>
@@ -43,13 +44,15 @@
         <a asp-controller="Home" asp-action="CreateBurial" class="btn btn-outline-secondary">Create New Record</a>
     </div>
 </div>
-</div>
 
-<div class="form-group">
-    <label for="page-input">Jump to page:</label>
-    <input type="number" id="page-input" name="page" min="1" max="@Model.PageInfo.TotalPages">
-    <button type="submit" class="btn btn-primary" 
-        href="@Url.Action("Summary", new { pageNum = 6 })">Go</button>
+<div class="form-group d-flex justify-content-center align-items-center">
+    <form method="get" action="@Url.Action("Summary", "Home" )">
+        <label for="pageNum">Jump to page:</label>
+        <input type="number" id="pageNum" name="pageNum" min="1" max="@Model.PageInfo.TotalPages">
+        <button type="submit" class="btn btn-primary">
+            Go
+        </button>
+    </form>
 </div>
 
 

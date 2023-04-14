@@ -27,8 +27,8 @@ namespace Intex2A.Controllers
 /*            _logger = logger;*/
         }
 
-        public IActionResult Summary(int pageNum = 1, string? sex, string? depth, string? ageatdeath, string headdirection,
-            string? wrapping, string? goods)
+        public IActionResult Summary(string? sex, string? depth, string? ageatdeath, string? headdirection,
+            string? wrapping, string? goods, int pageNum = 1)
         {
             int pageSize = 10;
 
@@ -63,7 +63,7 @@ namespace Intex2A.Controllers
 
             var x = new BurialsViewModel
             {
-                Burials = repo.Burials
+                Burials = query
                 .OrderBy(x => x.id)
                 .Skip((pageNum - 1) * pageSize)
                 .Take(pageSize),
