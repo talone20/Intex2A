@@ -85,11 +85,13 @@ namespace Intex2A.Controllers
             return View();
         }
         [HttpGet]
+        [Authorize]
         public IActionResult CreateBurial()
         {
             return View();
         }
         [HttpPost]
+        [Authorize]
         public IActionResult CreateBurial(burialmain burial)
         {
             if (burial == null)
