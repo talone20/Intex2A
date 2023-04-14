@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.ML.OnnxRuntime;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -51,7 +52,8 @@ namespace Intex2A
                 options.CheckConsentNeeded = context => true;
                 // requires using Microsoft.AspNetCore.Http;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
-                
+                options.ConsentCookie.SecurePolicy = CookieSecurePolicy.Always;
+
             });
             services.Configure<IdentityOptions>(options =>
             {
@@ -89,9 +91,12 @@ namespace Intex2A
             //        options.IncludeSubDomains = true;
             //        options.MaxAge = TimeSpan.FromDays(60);
             //    });
-            services.AddSingleton<InferenceSession>(
-                new InferenceSession("Model/my_model.onnx")
-              );
+            services.AddSingleton<InferenceSession>(provider => {
+                var env = provider.GetService<IWebHostEnvironment>();
+                var modelPath = Path.Combine(env.ContentRootPath, "Model", "my_model.onnx");
+                return new InferenceSession(modelPath);
+            }
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -118,7 +123,7 @@ namespace Intex2A
             app.UseAuthentication();
             app.UseAuthorization();
             app.Use(async (context, next) => {
-                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self' https://stackpath.bootstrapcdn.com 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://stackpath.bootstrapcdn.com https://fonts.gstatic.com; img-src 'self' https://via.placeholder.com; frame-src 'self'; connect-src 'self' wss://localhost:44391;");
+                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js https://ajax.aspnetcdn.com; style-src 'self' https://stackpath.bootstrapcdn.com 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://stackpath.bootstrapcdn.com https://fonts.gstatic.com; img-src 'self' https://via.placeholder.com; frame-src 'self'; connect-src 'self' wss://localhost:44391;");
                 await next();
             });
 
