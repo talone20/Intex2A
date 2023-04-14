@@ -63,6 +63,7 @@ namespace Intex2A.Controllers
             return View("Summary");
         }
         [HttpGet]
+        [Authorize]
         public IActionResult Edit(double burialId)
         {
             var burial = repo.Burials.FirstOrDefault(x => x.id == burialId);
@@ -75,6 +76,7 @@ namespace Intex2A.Controllers
             return View(burial);
         }
         [HttpPost]
+        [Authorize]
         public IActionResult Edit(burialmain burial)
         {
 
@@ -91,6 +93,7 @@ namespace Intex2A.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Delete(double burialId)
         {
             var burial = repo.Burials.FirstOrDefault(x => x.id == burialId);
@@ -104,6 +107,7 @@ namespace Intex2A.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult ConfirmDelete(double burialId)
         {
 
