@@ -121,7 +121,7 @@ namespace Intex2A
             app.UseAuthentication();
             app.UseAuthorization();
             app.Use(async (context, next) => {
-                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js; style-src 'self' https://stackpath.bootstrapcdn.com 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://stackpath.bootstrapcdn.com https://fonts.gstatic.com; img-src 'self' https://via.placeholder.com; frame-src 'self'; connect-src 'self' wss://localhost:44391;");
+                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js https://ajax.aspnetcdn.com; style-src 'self' https://stackpath.bootstrapcdn.com 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://stackpath.bootstrapcdn.com https://fonts.gstatic.com; img-src 'self' https://via.placeholder.com; frame-src 'self'; connect-src 'self' wss://localhost:44391;");
                 await next();
             });
 
